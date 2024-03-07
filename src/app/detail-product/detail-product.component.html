@@ -1,0 +1,19 @@
+<p>detail-product works!</p>
+
+<div class="product-details" *ngIf="product">
+    <div class="product-image">
+      <img [src]="product.imageURL" alt="{{ product.name }}">
+    </div>
+    <div class="product-info">
+      <h2>{{ product.name }}</h2>
+      <p class="description">Description: {{ product.description }}</p>
+      <p class="brand">Marque: {{ product.brand }}</p>
+      <p class="category">Catégorie: {{ product.categoryId }}</p>
+      <p class="color">Couleur: {{ product.color }}</p>
+      <p class="size">Taille: {{ product.size }}</p>
+      <p class="price">Prix: {{ product.price }}</p>
+    </div>
+  </div>
+
+
+  

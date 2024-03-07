@@ -1,0 +1,43 @@
+
+
+<p>product-list works!</p>
+<form (ngSubmit)="filterBook(f)" #f="ngForm">
+    <div class="mb-3">
+        <label for="categoryID" class="form-label">Category *</label>
+        <!--input type="text" class="form-control" id="author" name="author" ngModel required #author="ngModel"-->
+        <select id="categoryID" name="categoryID" ngModel required #category="ngModel" class="form-control">
+            <option value="">--Toute Category--</option>
+            <option *ngFor="let c of categoryDisplayed" [value]="c.id">{{c.name}}</option>
+        </select>
+        <span class="erreur" *ngIf="category.invalid && category.touched">Le champ Auteur est obligatoire</span>
+
+    </div>
+    <button type="submit" class="btn btn-primary" >Valider</button>
+</form>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>CategoryID</th>
+            <th>Brand</th>
+            <th>Prix</th>
+            <th>Description</th>
+            <th>Editer</th>
+            <th>Supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of filteredProduct?filteredProduct:productsToDisplay">
+            <td>{{p.id}}</td>
+            <td>{{p.name}}</td>
+            <td>{{ p.category}}</td>
+            <td>{{p.brand}}</td>
+            <td>{{p.price}}</td>
+            <td><button class="btn btn-info" [routerLink]="['/detail-product', p.id]" >Afficher les détails</button></td>
+            <td><button class="btn btn-primary" >Editer</button></td>
+            <td><button class="btn btn-danger" >Supprimer</button></td>
+        </tr>
+    </tbody>
