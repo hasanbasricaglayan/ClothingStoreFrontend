@@ -1,0 +1,31 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.card img { 
+
+height: 250px;
+
+}
+.card{
+    height: 600px !important;
+
+
+
+}
+.card h5 {
+    width: 100%;
+    overflow:hidden;
+    height: 30px;
+    
+}
+ 
+.card-button{
+    margin-bottom: 20px;
+
+} 
+
+.formCatalogue {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
