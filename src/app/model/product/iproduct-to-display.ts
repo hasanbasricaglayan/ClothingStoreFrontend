@@ -4,5 +4,7 @@ export interface IProductToDisplay{
     brand : string,
     category : number,
     price : number,
+    url:string,
+    description:string
 
 }

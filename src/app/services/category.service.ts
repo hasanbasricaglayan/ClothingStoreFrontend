@@ -30,9 +30,12 @@ export class CategoryService {
 
     getCategoryName(id : number){
         const cat = this.categories.find(c => c.categoryId == id )
-        return cat?.categoryId
+        return cat?.name
     }
-
+    getCategoryById(id : number){
+        const cat = this.categories.find(c => c.categoryId == id )
+        return cat
+    }
 
     getProductsByCategory(idCategory: number) {
         console.log("GET");

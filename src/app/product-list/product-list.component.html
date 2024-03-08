@@ -1,43 +1,39 @@
+<div class="head-catalogue" style="display: flex; flex-direction: column; align-items: center;">
+
+    <div style="text-align: center;">
+        <h1>Catalogue</h1>
+    </div>
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="margin-top: 10px;">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            <button type="button" class="btn btn-secondary" [value]=0 (click)="filterProduct2(0)">--Toute Category
+            </button>
+            <button type="button" class="btn btn-secondary" *ngFor="let c of categoryDisplayed" [value]="c.id"
+                (click)="filterProduct2(c.id)">{{c.name}}</button>
+        </div>
+    </div>
+</div>
+
+<div class="card-group" style="margin-top: 10px;">
 
 
-<p>product-list works!</p>
-<form (ngSubmit)="filterBook(f)" #f="ngForm">
-    <div class="mb-3">
-        <label for="categoryID" class="form-label">Category *</label>
-        <!--input type="text" class="form-control" id="author" name="author" ngModel required #author="ngModel"-->
-        <select id="categoryID" name="categoryID" ngModel required #category="ngModel" class="form-control">
-            <option value="">--Toute Category--</option>
-            <option *ngFor="let c of categoryDisplayed" [value]="c.id">{{c.name}}</option>
-        </select>
-        <span class="erreur" *ngIf="category.invalid && category.touched">Le champ Auteur est obligatoire</span>
+    <div class="container text-center">
+        <div class="row row-cols-2 row-cols-md-4">
+            <div class="col p-2" *ngFor="let product of filteredProduct?filteredProduct:productsToDisplay">
+                <div class="card">
+                    <img class="card-img-top object-fit-contain" [src]="product.url" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text"><strong>Brand :</strong>{{product.brand}}</p>
+                        <p class="card-text"><strong>Catégorie :</strong> {{ getCategoryName(product.category) }}</p>
+                        <p class="card-text"><strong>Prix :</strong> {{ product.price }}</p>
+
+                    </div>
+                    <div class="card-button">                        
+                        <button class="btn btn-info" [routerLink]="['/detail-product', product.id]">Afficher les
+                            détails</button></div>
+                </div>
+            </div>
+        </div>
 
     </div>
-    <button type="submit" class="btn btn-primary" >Valider</button>
-</form>
-
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>CategoryID</th>
-            <th>Brand</th>
-            <th>Prix</th>
-            <th>Description</th>
-            <th>Editer</th>
-            <th>Supprimer</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let p of filteredProduct?filteredProduct:productsToDisplay">
-            <td>{{p.id}}</td>
-            <td>{{p.name}}</td>
-            <td>{{ p.category}}</td>
-            <td>{{p.brand}}</td>
-            <td>{{p.price}}</td>
-            <td><button class="btn btn-info" [routerLink]="['/detail-product', p.id]" >Afficher les détails</button></td>
-            <td><button class="btn btn-primary" >Editer</button></td>
-            <td><button class="btn btn-danger" >Supprimer</button></td>
-        </tr>
-    </tbody>
