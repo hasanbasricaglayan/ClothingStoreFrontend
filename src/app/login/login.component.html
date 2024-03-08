@@ -1,1 +1,30 @@
-<p>login works!</p>
+
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header bg-info text-white">
+            <h2 class="text-center">Page d'authentification</h2>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="login(email.value, password.value)">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" #email required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="password" #password required>
+              </div>
+              <div style="text-align: center;">
+                <button type="submit" class="btn btn-info btn-block"   >Se connecter</button>
+              </div>
+              
+            </form>
+
+            <a href="/sign-in">cliquer ici si vous n'etes pas inscris</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
