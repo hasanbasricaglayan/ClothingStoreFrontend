@@ -1,0 +1,35 @@
+<div class="row m-3">
+	<h2>Détails de la commande {{order?.orderId}}</h2>
+</div>
+<div class="row m-3 justify-content-around align-items-center">
+	<div class="col-auto text-center">
+		<h6>Identifiant client</h6>
+		<p>{{order?.userId}}</p>
+	</div>
+	<div class="col-auto text-center">
+		<h6>Date</h6>
+		<p>{{order?.orderDate | date: "dd/MM/yyyy"}}</p>
+	</div>
+	<div class="col-auto text-center">
+		<h6>Statut</h6>
+		<div class="d-flex flex-column justify-content-start align-items-center gap-2">
+			<span>{{order?.status}}</span>
+			<button class="btn btn-primary">Modifier</button>
+		</div>
+	</div>
+</div>
+<!-- <app-order-details></app-order-details> -->
+<div *ngIf="order != undefined " class="row m-3 justify-content-center align-items-center">
+	<form class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-4 mb-3" #form="ngForm" (ngSubmit)="editOrderStatus(form)">
+		<div class="mb-3">
+			<label for="status" class="form-label">Status</label>
+			<select class="form-control" id="status"
+					[ngModel]="order!.status"
+					name="status"
+					#status="ngModel">
+				<option *ngFor="let status of orderStatus">{{status}}</option>
+			</select>
+		</div>
+		<button type="submit" class="btn btn-primary" [disabled]="form.invalid">Editer le status</button>
+	</form>
+</div>
