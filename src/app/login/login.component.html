@@ -7,7 +7,7 @@
             <h2 class="text-center">Page d'authentification</h2>
           </div>
           <div class="card-body">
-            <form (ngSubmit)="login(email.value, password.value)">
+            <form (ngSubmit)="logintoAPI(email.value, password.value)">
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" #email required>

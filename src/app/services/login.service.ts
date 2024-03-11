@@ -33,7 +33,7 @@ export class LoginService {
 
           //Enregistrer le token dans localstorage
           localStorage.setItem("token", authToken);
-
+          console.log(localStorage.getItem("token"))
           //une fois que l'utilisateur est connecté, je le redirige vers la liste des books
           this.router.navigate(["/product-list"]);
         },

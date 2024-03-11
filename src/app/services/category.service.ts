@@ -39,7 +39,7 @@ export class CategoryService {
 
     getProductsByCategory(idCategory: number) {
         console.log("GET");
-        this.http.get<Product[]>(this.CategoryURl + "/" + idCategory).subscribe(
+        this.http.get<Product[]>(this.CategoryURl + "/" + idCategory+ "/Products").subscribe(
             ps => {
                 this.products = ps;
                 console.log(this.products);

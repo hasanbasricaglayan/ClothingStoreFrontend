@@ -10,11 +10,8 @@ export class LoginComponent {
   constructor(private loginService : LoginService){}
 
   logintoAPI(email : string, password : string){
+    console.log(email + " " + password)
     this.loginService.login(email, password);
   }
-  login(email : string,password :string){
-
-      console.log(email + " " + password)
-
-  }
+ 
 }
