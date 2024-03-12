@@ -12,7 +12,7 @@ export class OrderService {
 	updatedOrders = new Subject<Order[]>()
 
 	baseURL = "https://localhost:7108/api/Orders"
-
+	userUrl = "https://localhost:7108/api/Users"
 	constructor(private http: HttpClient) { }
 	 options = {
 		headers: new HttpHeaders(
@@ -28,6 +28,11 @@ export class OrderService {
 		 
 		const URL = `${this.baseURL}/`
 		return  this.http.get<Order[]>(URL,this.options)
+	}
+
+	getOrdersByUser(userId : number){
+		const Url = this.userUrl + "/" + userId + "/Orders"
+		return this.http.get<Order[]>(Url,this.options)
 	}
 
 	getOrderById(orderId: number): Observable<Order> {

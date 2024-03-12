@@ -15,13 +15,14 @@ import { OrderService } from '../../services/order.service';
 export class ListOrdersComponent implements OnInit, OnDestroy {
 	usersSubscription?: Subscription
 	users?: User[]
+	UserCurrent? : User
 	ordersSubscription?: Subscription
 	orders?: Order[]
 	ordersToDisplay?: OrderToDisplay[]
 
 	constructor(private orderService: OrderService, private userService: UserService) { }
 
-	ordersToOrdersToDisplay(): OrderToDisplay[] {
+	adminOrdersToOrdersToDisplay(): OrderToDisplay[] {
 		return this.orders!.map(order => {
 			const user = this.users!.find(user => user.userId === order.userId)
 			return {
@@ -40,7 +41,27 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 		})
 	}
 
-	getOrdersWithUsers() {
+	ordersToOrdersToDisplay(): OrderToDisplay[] {
+		return this.orders!.map(order => {
+			//const user = this.users!.find(user => user.userId === order.userId)
+			return {
+				orderId: order.orderId,
+				orderDate: order.orderDate,
+				status: order.status,
+				orderUser: {
+					userId: order.userId,
+					fullName: this.UserCurrent?.firstName,
+					phoneNumber: this.UserCurrent?.phoneNumber,
+					email: this.UserCurrent?.email,
+					billingAdress: this.UserCurrent?.billingAdress,
+					deliveryAdress: this.UserCurrent?.deliveryAdress
+				} as UserToDisplay
+			} as OrderToDisplay
+		})
+	}
+
+
+	getOrdersWithUsersForAdmin() {
 		this.userService.getUsers().pipe(
 			concatMap(users => {
 				this.users = users
@@ -53,8 +74,28 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 			})
 	}
 
+
+	getOrdersWithUsers() {
+		this.userService.getUserById(this.UserCurrent!.userId).pipe(
+			concatMap(user => {
+				
+				return this.orderService.getOrdersByUser(user.userId)
+			})
+		)
+			.subscribe(orders => {
+				this.orders = orders
+				this.ordersToDisplay = this.ordersToOrdersToDisplay()
+			})
+	}
+
 	ngOnInit(): void {
+		this.userService.getUserByToken().subscribe( user => {
+			this.UserCurrent = user;
+		console.log(this.UserCurrent?.firstName)
 		this.getOrdersWithUsers()
+	})
+		
+		
 	}
 
 	ngOnDestroy(): void {

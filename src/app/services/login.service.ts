@@ -17,6 +17,14 @@ export class LoginService {
 
   constructor(private http : HttpClient, private router : Router) { }
 
+  isAuthenticated() : boolean{
+    if(localStorage.getItem("token") == undefined)
+      return false
+    //Il recommandé d'ajouter une requête vers le serveur afin de vérifier la validité du token
+    return true
+  }
+
+
   login(email : string, password : string){
     const body = JSON.stringify({
         Email : email,

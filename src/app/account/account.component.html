@@ -1,0 +1,29 @@
+<p>account works!</p>
+
+<div class="container mt-8">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">Account</h2>
+            <div class="infoPerso">
+            <label for="email">Email : </label><p> {{User?.email}}</p>
+            </div>
+            <div class="infoPerso">
+                <label for="prenom">Prenom : </label><p> {{User?.firstName}}</p>
+            </div>
+            <div class="infoPerso"><label for="nom">Nom : </label><p>{{User?.lastName}}</p></div>
+            <div class="infoPerso"><label for="date">Date de Naissaince : </label><p>{{User?.dateOfBirth}}</p></div>
+            <div class="infoPerso"><label for="num">Numeros de Telephone : </label><p>{{User?.phoneNumber}}</p></div>
+            <div class="infoPerso"><label for="nom">Adress de Paiement : </label><p>{{User?.billingAdress}}</p></div>
+            <div class="infoPerso"><label for="nom">Adress de Livraison : </label><p>{{User?.deliveryAdress}}</p></div>
+            
+            <div class="text-center mb-3">
+              <button class="btn btn-primary mr-2" style="margin: 3%;" (click)="goToEditPage()" >Edit Account</button>
+              <button class="btn btn-secondary" (click)="goToOrderPage()" >Order History</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
