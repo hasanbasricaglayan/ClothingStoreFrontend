@@ -23,6 +23,11 @@ export class AccountComponent implements OnInit{
     this.router.navigate(["/orders"]);
     }
 
+    deconnect(){
+      localStorage.removeItem("token")
+      this.router.navigate(["/login"])
+    }
+
   ngOnInit(): void {
     
       console.log("Account")
