@@ -1,51 +1,63 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Product } from '../model/product/product';
 import { Observable, Subject } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Category } from '../model/category/category';
+import { CategoryDTO } from '../models/category/category-dto';
+import { ProductDTO } from '../models/product/product-dto';
 import { ProductService } from './product.service';
 
 @Injectable({
-    providedIn: 'root'
+	providedIn: 'root'
 })
 export class CategoryService {
+	private categories: CategoryDTO[] = []
+	private updatedCategories$$ = new Subject<CategoryDTO[]>()
+	readonly updatedCategories$ = this.updatedCategories$$.asObservable()
 
-    private categories :Category[] = [];
-    private products : Product[] = [];
-    categoriesUpdated = new Subject<Category[]>();
-    
-    constructor(private http : HttpClient,private productService : ProductService) { }
-    CategoryURl = "https://localhost:7108/api/Categories";
+	private products: ProductDTO[] = []
+	private updatedProducts$$ = new Subject<ProductDTO[]>()
+	readonly updatedProducts$ = this.updatedProducts$$.asObservable()
 
-    getCategories(){
-        this.http.get<Category[]>(this.CategoryURl).subscribe(c =>
-            {
-                this.categories = c;
-                console.log(this.categories);
-                this.categoriesUpdated.next([...this.categories])
-            }
-            )
+	baseURL = "https://localhost:7108/api/Categories"
 
-    }
+	constructor(private http: HttpClient, private productService: ProductService) { }
 
-    getCategoryName(id : number){
-        const cat = this.categories.find(c => c.categoryId == id )
-        return cat?.name
-    }
-    getCategoryById(id : number){
-        const cat = this.categories.find(c => c.categoryId == id )
-        return cat
-    }
+	getCategories() {
+		const URL = `${this.baseURL}/`
 
-    getProductsByCategory(idCategory: number) {
-        console.log("GET");
-        this.http.get<Product[]>(this.CategoryURl + "/" + idCategory).subscribe(
-            ps => {
-                this.products = ps;
-                console.log(this.products);
-                this.productService.productsUpdated.next([...this.products]);
-            }
-        );
-    } 
+		this.http.get<CategoryDTO[]>(URL).subscribe(categories => {
+			this.categories = categories
+			this.updatedCategories$$.next([...this.categories])
+		})
 
+		return this.updatedCategories$
+	}
+
+	getProductsOfCategory(categoryId: number) {
+		const URL = `${this.baseURL}/${categoryId}/Products`
+
+		this.http.get<ProductDTO[]>(URL).subscribe(products => {
+			this.products = products
+			this.updatedProducts$$.next([...this.products])
+		})
+
+		return this.updatedProducts$
+	}
+
+	getCategoryByIdWithProducts(categoryId: number): Observable<CategoryDTO> {
+		const URL = `${this.baseURL}/${categoryId}`
+
+		return this.http.get<CategoryDTO>(URL)
+	}
+
+	getProductById(productId: number): Observable<ProductDTO> {
+		const URL = `${this.baseURL}/${productId}`
+
+		return this.http.get<ProductDTO>(URL)
+	}
+
+	getCategoryById(categoryId: number) {
+		const URL = `${this.baseURL}/${categoryId}`
+
+		return this.http.get<CategoryDTO>(URL)
+	}
 }

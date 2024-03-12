@@ -1,0 +1,19 @@
+<div class="product-details">
+	<div class="product-image">
+		<img [src]="product?.imageURL" alt="{{ product?.name }}">
+	</div>
+	<div class="product-info">
+		<h2>{{ product?.name }}</h2>
+		<p class="description">Description : {{ product?.description }}</p>
+		<p class="brand">Marque : <strong>{{ product?.brand }}</strong></p>
+		<p class="category">Catégorie : <strong>{{ category?.name }}</strong></p>
+		<p class="color">Couleur : <strong>{{ product?.color }}</strong></p>
+		<p class="size">Taille : <strong>{{ product?.size }}</strong></p>
+		<p class="price">Prix : <strong style="color: chocolate;">{{ product?.price }} € </strong> </p>
+		<form #f="">
+			<input type="number" name="quantité a ajouter au panier" id="Qtt" min="1" max={{product?.quantityInStock}}>
+			<button class="btn btn-info">Ajouter au panier</button>
+		</form>
+
+	</div>
+</div>

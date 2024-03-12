@@ -5,6 +5,7 @@
 	<thead class="align-middle">
 		<tr>
 			<th>N° de commande</th>
+			<th>Identifiant Client</th>
 			<th>Client</th>
 			<th>Date</th>
 			<th>Status</th>
@@ -14,10 +15,11 @@
 	<tbody class="align-middle">
 		<tr *ngFor="let order of ordersToDisplay">
 			<td>{{order.orderId}}</td>
-			<td>{{order.orderUser.userId}} - {{order.orderUser.fullName}}</td>
+			<td>{{order.userId}}</td>
+			<td>{{order.orderUser.fullName}}</td>
 			<td>{{order.orderDate | date: "dd/MM/yyyy"}}</td>
 			<td>{{order.status}}</td>
-			<td><button class="btn btn-info" [routerLink]="['/orders', 'details', order.orderId]">Détails</button></td>
+			<td><button class="btn btn-info" [routerLink]="['/orders', order.orderId]">Détails</button></td>
 		</tr>
 	</tbody>
 </table>

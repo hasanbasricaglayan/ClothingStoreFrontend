@@ -4,21 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { DetailProductComponent } from './detail-product/detail-product.component';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-  		ProductListComponent,
-    DetailProductComponent,
-    LoginComponent
+		LoginComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
-		HttpClientModule,FormsModule
+		HttpClientModule,
+		FormsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

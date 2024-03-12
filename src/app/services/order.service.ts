@@ -1,32 +1,41 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Order } from '../models/order';
-import { OrderDTO } from '../models/order-dto';
+import { Order } from '../models/order/order';
+import { OrderDTO } from '../models/order/order-dto';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class OrderService {
-	private orders: Order[] = []
-	updatedOrders = new Subject<Order[]>()
+	private orders: OrderDTO[] = []
+	private updatedOrders$$ = new Subject<OrderDTO[]>()
+	readonly updatedOrders$ = this.updatedOrders$$.asObservable()
 
 	baseURL = "https://localhost:7108/api/Orders"
 
 	constructor(private http: HttpClient) { }
 
-	getOrders(): Observable<Order[]> {
+	getAllOrdersWithProducts(): Observable<OrderDTO[]> {
 		const URL = `${this.baseURL}/`
-		return this.http.get<Order[]>(URL)
+
+		this.http.get<OrderDTO[]>(URL).subscribe(orders => {
+			this.orders = orders
+			this.updatedOrders$$.next([...this.orders])
+		})
+
+		return this.updatedOrders$
 	}
 
-	getOrderById(orderId: number): Observable<Order> {
+	getOrderByIdWithProducts(orderId: number): Observable<OrderDTO> {
 		const URL = `${this.baseURL}/${orderId}`
-		return this.http.get<Order>(URL)
+
+		return this.http.get<OrderDTO>(URL)
 	}
 
-	editOrder(orderId: number, orderDTO: OrderDTO): Observable<Order> {
-		const URL = `${this.baseURL}/${orderId}`
+	editOrder(order: OrderDTO): Observable<Order> {
+		const URL = `${this.baseURL}/${order.orderId}`
+
 		const options = {
 			headers: new HttpHeaders({
 				'content-type': 'application/json'
@@ -36,7 +45,9 @@ export class OrderService {
 		return this.http.put<Order>(
 			URL,
 			JSON.stringify({
-				Status: orderDTO.status,
+				UserId: order.userId,
+				OrderDate: order.orderDate,
+				Status: order.status
 			}),
 			options)
 	}
