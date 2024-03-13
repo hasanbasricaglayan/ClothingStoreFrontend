@@ -4,6 +4,7 @@ import { CategoryDTO } from 'src/app/models/category/category-dto';
 import { ProductDTO } from 'src/app/models/product/product-dto';
 import { CategoryService } from '../../services/category.service';
 import { ProductService } from '../../services/product.service';
+import { ResearchService } from 'src/app/services/research.service';
 
 @Component({
 	selector: 'app-list-products',
@@ -11,6 +12,7 @@ import { ProductService } from '../../services/product.service';
 	styleUrls: ['./list-products.component.css']
 })
 export class ListProductsComponent implements OnInit, OnDestroy {
+
 	productsSubscription?: Subscription
 	products: ProductDTO[] = []
 	filteredProducts?: ProductDTO[]
@@ -18,7 +20,7 @@ export class ListProductsComponent implements OnInit, OnDestroy {
 	categoriesSubscription?: Subscription
 	categories: CategoryDTO[] = []
 
-	constructor(private productService: ProductService, private categoryService: CategoryService) { }
+	constructor(private productService: ProductService, private categoryService: CategoryService,private researchService : ResearchService) { }
 
 	filterProducts(f: number) {
 		if (f == 0)
@@ -29,6 +31,16 @@ export class ListProductsComponent implements OnInit, OnDestroy {
 			this.categoryService.getProductsOfCategory(+f).subscribe(products => {
 				this.products = products
 			})
+	}
+
+	reset() {
+		this.ngOnInit()
+		}
+
+	receivedMessage?: string;
+	searchProduct(r : string){
+
+		this.products = this.products.filter(p => p.name.toLowerCase().includes(r.toLowerCase()))
 	}
 
 	ngOnInit(): void {
@@ -45,10 +57,17 @@ export class ListProductsComponent implements OnInit, OnDestroy {
 				return this.productService.getProducts()
 			})
 		).subscribe()
+		this.researchService.data$.subscribe(data => {
+			this.receivedMessage = data ? data.message : '';
+			console.log(this.receivedMessage)
+			this.searchProduct(this.receivedMessage!)
+		  });
 	}
 
 	ngOnDestroy(): void {
 		this.categoriesSubscription?.unsubscribe()
 		this.productsSubscription?.unsubscribe()
+
+		
 	}
 }

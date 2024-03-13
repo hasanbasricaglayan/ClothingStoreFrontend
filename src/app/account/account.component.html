@@ -1,10 +1,11 @@
-<div class="row m-3">
-	<h2>Mon compte</h2>
-</div>
-<section class="bg-body-tertiary">
+
+<section class="bg-body-tertiary" *ngIf="role==false">
 	<div class="container pt-4">
 		<div class="row justify-content-center align-items-center">
 			<div class="col-lg-8">
+				<div class="row m-3" style="text-align: center;">
+					<h1>Mon compte</h1>
+				</div>
 				<div class="card mb-4">
 					<div class="card-body px-5">
 						<div class="row justify-content-center align-items-center text-center my-3">
@@ -66,7 +67,8 @@
 						<hr>
 						<div class="d-flex justify-content-center align-items-center gap-3">
 							<button class="btn btn-primary" (click)="goToEditPage()">Modifier</button>
-							<button class="btn btn-secondary" (click)="goToOrderPage()">Historique des commandes</button>
+							<button class="btn btn-secondary" (click)="goToOrderPage()">Historique des
+								commandes</button>
 							<button class="btn btn-danger" (click)="deconnect()">Se déconnecter</button>
 						</div>
 					</div>
@@ -74,4 +76,52 @@
 			</div>
 		</div>
 	</div>
+</section>
+
+<section class="panel-admin" *ngIf="role==true">
+	<div class="container" >
+		<div class="title-panel"><h1>Panel Admin</h1></div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Modification des utilisateurs <i class="bi bi-people"></i></h5>
+						<p class="card-text">Gérer les utilisateurs inscrits sur le site.</p>
+						<button class="btn btn-info"  (click)="goToAdminUsersListPage()">Accéder</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Modification des produits  <i class="bi bi-pencil-square"></i></h5>
+						<p class="card-text">Gérer les produits disponibles dans le catalogue.</p>
+						<button class="btn btn-info" (click)="goToAdminUsersListPage()">Accéder</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Modification des commandes <i class="bi bi-box-seam"></i></h5>
+						<p class="card-text">Gérer les commandes passées par les utilisateurs.</p>
+						<button class="btn btn-info" (click)="goToAdminUsersListPage()">Accéder</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Modification des catégories <i class="bi bi-tags-fill"></i></h5>
+						<p class="card-text">Gérer les catégories des produits.</p>
+						<button class="btn btn-info" (click)="goToAdminUsersListPage()">Accéder</button>
+					</div>
+				</div>
+			</div>
+
+
+			<button class="btn btn-danger" (click)="deconnect()">Se déconnecter</button>
+		</div>
+	</div>
+
 </section>

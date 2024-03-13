@@ -9,3 +9,21 @@
 
 	margin-left: 3%;
 }
+
+
+.panel-admin button {
+
+	width:100%;
+}
+
+.panel-admin .title-panel h1{
+	text-align: center;
+margin: 2%;}
+
+.panel-admin .card {
+	margin: 5px;
+}
+.panel-admin i {
+
+	margin: 1px;
+}

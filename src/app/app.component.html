@@ -7,22 +7,24 @@
 				</div>
 			</div>
 			<div class="navbar navbar-expand flex-wrap gap-4 me-auto">
-				<div class="nav-item">
+				<!-- <div class="nav-item">
 					<a class="nav-link fs-5" routerLink="/categories">Catégories</a>
-				</div>
+				</div> -->
 				<div class="nav-item">
 					<a class="nav-link fs-5" routerLink="/products">Vêtements</a>
 				</div>
-				<div class="nav-item">
+				<!-- <div class="nav-item">
 					<a class="nav-link fs-5" routerLink="/users">Utilisateurs</a>
-				</div>
-				<div class="nav-item">
+				</div> -->
+				<!-- <div class="nav-item">
 					<a class="nav-link fs-5" routerLink="/orders">Commandes</a>
-				</div>
+				</div> -->
 			</div>
-			<form class="d-flex me-auto" role="search">
-				<input type="search" class="form-control" id="search" placeholder="Rechercher">
-				<button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+			<form class="d-flex me-auto" role="research" #form="ngForm" (click)="sendResearch(form)">
+				<input type="search" class="form-control" for="search" id="search" placeholder="Rechercher"  ngModel
+				name="search"
+				#search="ngModel">
+				<button class="btn btn-outline-dark" type="submit" ><i class="bi bi-search"></i></button>
 			</form>
 			<div class="navbar navbar-expand flex-wrap gap-4">
 				<div class="d-flex justify-content-center align-items-center gap-1">

@@ -67,8 +67,8 @@ export class UserService {
 				Email: user.email,
 				Password: user.password,
 				DateOfBirth: user.dateOfBirth,
-				BillingAddress: user.billingAdress,
-				DeliveryAddress: user.deliveryAdress,
+				BillingAdress: user.billingAdress,
+				DeliveryAdress: user.deliveryAdress,
 				IsAdmin: user.isAdmin
 			}),
 			options)

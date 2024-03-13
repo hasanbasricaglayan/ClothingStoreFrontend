@@ -1,0 +1,74 @@
+
+<section class="bg-body-tertiary">
+	<div class="container pt-3">
+		<div class="row align-items-center justify-content-center">
+			<form class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-4 mb-3" #form="ngForm" (ngSubmit)="addUser(form)">
+				<div class="mb-3">
+					<label for="firstName" class="form-label"><strong>Prénom</strong></label>
+					<input type="text" class="form-control" id="firstName" required
+						   ngModel
+						   name="firstName"
+						   #firstName="ngModel">
+					<span class="error" *ngIf="firstName.invalid && firstName.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="lastName" class="form-label"><strong>Nom</strong></label>
+					<input type="text" class="form-control" id="lastName" required
+						   ngModel
+						   name="lastName"
+						   #lastName="ngModel">
+					<span class="error" *ngIf="lastName.invalid && lastName.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="phoneNumber" class="form-label"><strong>Téléphone</strong></label>
+					<input type="text" class="form-control" id="phoneNumber" required
+						   ngModel
+						   name="phoneNumber"
+						   #phoneNumber="ngModel">
+					<span class="error" *ngIf="phoneNumber.invalid && phoneNumber.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="emailAddress" class="form-label"><strong>Email</strong></label>
+					<input type="email" class="form-control" id="emailAddress" required
+						   ngModel
+						   name="emailAddress"
+						   #emailAddress="ngModel">
+					<span class="error" *ngIf="emailAddress.invalid && emailAddress.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="password" class="form-label"><strong>Mot de passe</strong></label>
+					<input type="password" class="form-control" id="password" required
+						   ngModel
+						   name="password"
+						   #password="ngModel">
+					<span class="error" *ngIf="password.invalid && password.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="dateOfBirth" class="form-label"><strong>Date de naissance</strong></label>
+					<input type="date" class="form-control" id="dateOfBirth" required
+						   ngModel
+						   name="dateOfBirth"
+						   #dateOfBirth="ngModel">
+					<span class="error" *ngIf="dateOfBirth.invalid && dateOfBirth.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="billingAddress" class="form-label"><strong>Adresse de facturation</strong></label>
+					<input type="text" class="form-control" id="billingAddress" required
+						   ngModel
+						   name="billingAddress"
+						   #billingAddress="ngModel">
+					<span class="error" *ngIf="billingAddress.invalid && billingAddress.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="deliveryAddress" class="form-label"><strong>Adresse de livraison</strong></label>
+					<input type="text" class="form-control" id="deliveryAddress" required
+						   ngModel
+						   name="deliveryAddress"
+						   #deliveryAddress="ngModel">
+					<span class="error" *ngIf="deliveryAddress.invalid && deliveryAddress.touched">Le champ est obligatoire.</span>
+				</div>
+				<button type="submit" class="btn btn-primary" [disabled]="form.invalid">Valider</button>
+			</form>
+		</div>
+	</div>
+</section>

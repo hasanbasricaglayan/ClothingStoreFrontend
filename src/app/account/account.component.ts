@@ -11,9 +11,24 @@ import { LoginService } from '../services/login.service';
 })
 export class AccountComponent implements OnInit {
 
-	constructor(private router: Router, private userService: UserService , private loginService : LoginService) { }
 
+	constructor(private router: Router, private userService: UserService , private loginService : LoginService) { }
+	role? : boolean
 	user?: UserDTO
+
+	isAdmin(){
+		if(localStorage.getItem("role") == "client"){
+			this.role = false;
+		}
+		else{
+			this.role=true;
+		}
+		
+	}
+
+	goToAdminUsersListPage() {
+		this.router.navigate(["/users"]);
+	}
 
 	goToEditPage() {
 		this.router.navigate(["/edit-user"]);
@@ -33,8 +48,10 @@ export class AccountComponent implements OnInit {
 		console.log("Account")
 		this.userService.getUserByToken().subscribe(user => {
 			this.user = user;
-			console.log(this.user)
-
+			//console.log(this.user)
+			this.isAdmin()
+			console.log(this.role)
 		})
+
 	}
 }
