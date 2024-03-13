@@ -1,10 +1,11 @@
-.infoPerso{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    margin-left: 3%;
+.infoPerso {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin-left: 3%;
 }
+
 .infoPerso p {
 
-    margin-left: 3%;
-} 
+	margin-left: 3%;
+}

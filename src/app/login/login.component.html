@@ -1,30 +1,25 @@
-
-  <div class="container">
-    <div class="row justify-content-center mt-5">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="card-header bg-info text-white">
-            <h2 class="text-center">Page d'authentification</h2>
-          </div>
-          <div class="card-body">
-            <form (ngSubmit)="logintoAPI(email.value, password.value)">
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" #email required>
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="password" #password required>
-              </div>
-              <div style="text-align: center;">
-                <button type="submit" class="btn btn-info btn-block"   >Se connecter</button>
-              </div>
-              
-            </form>
-
-            <a href="/sign-in">cliquer ici si vous n'etes pas inscris</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="row m-3">
+	<h2>Se connecter</h2>
+</div>
+<section class="bg-body-tertiary">
+	<div class="container pt-3">
+		<div class="row align-items-center justify-content-center">
+			<form class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-4 mb-3" #form="ngForm" (ngSubmit)="logintoAPI(emailAddress.value, password.value)">
+				<div class="mb-3">
+					<label for="emailAddress" class="form-label"><strong>Email</strong></label>
+					<input type="email" class="form-control" id="emailAddress" required #emailAddress>
+				</div>
+				<div class="mb-3">
+					<label for="password" class="form-label"><strong>Mot de passe</strong></label>
+					<input type="password" class="form-control" id="password" required #password>
+				</div>
+				<div class="text-center mb-3">
+					<button type="submit" class="btn btn-info btn-block">Se connecter</button>
+				</div>
+				<div class="text-center">
+					<a routerLink="sign-in">Pas encore inscris ? Cliquez ici pour créer un compte !</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
