@@ -67,8 +67,8 @@ export class UserService {
 				Email: user.email,
 				Password: user.password,
 				DateOfBirth: user.dateOfBirth,
-				BillingAddress: user.billingAddress,
-				DeliveryAddress: user.deliveryAddress,
+				BillingAddress: user.billingAdress,
+				DeliveryAddress: user.deliveryAdress,
 				IsAdmin: user.isAdmin
 			}),
 			options)
@@ -97,8 +97,8 @@ export class UserService {
 				Email: user.email,
 				Password: user.password,
 				DateOfBirth: user.dateOfBirth,
-				BillingAddress: user.billingAddress,
-				DeliveryAddress: user.deliveryAddress,
+				BillingAddress: user.billingAdress,
+				DeliveryAddress: user.deliveryAdress,
 				IsAdmin: user.isAdmin
 			}),
 			options)

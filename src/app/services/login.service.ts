@@ -79,7 +79,7 @@ export class LoginService {
                     //Verifie le role
                     this.getRole()
                     //une fois que l'utilisateur est connecté, je le redirige vers la liste des books
-                    this.router.navigate(["/product-list"]);
+                    this.router.navigate(["/products"]);
                     
                 },
                 error: error => console.log(error),

@@ -22,8 +22,8 @@ export class EditUserComponent implements OnInit {
 		this.newUser!.firstName = f.value.firstName
 		this.newUser!.lastName = f.value.lastName
 		this.newUser!.phoneNumber = f.value.phoneNumber
-		this.newUser!.deliveryAddress = f.value.deliveryAddress
-		this.newUser!.billingAddress = f.value.billingAddress
+		this.newUser!.deliveryAdress = f.value.deliveryAddress
+		this.newUser!.billingAdress = f.value.billingAddress
 		this.newUser!.dateOfBirth = f.value.dateOfBirth
 
 

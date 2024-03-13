@@ -56,7 +56,7 @@
 				<div class="mb-3">
 					<label for="billingAddress" class="form-label">Adresse de facturation</label>
 					<input type="text" class="form-control" id="billingAddress" required
-						   [(ngModel)]="user.billingAddress"
+						   [(ngModel)]="user.billingAdress"
 						   name="billingAddress"
 						   #billingAddress="ngModel">
 					<span class="error" *ngIf="billingAddress.invalid && billingAddress.touched">Le champ est obligatoire.</span>
@@ -64,7 +64,7 @@
 				<div class="mb-3">
 					<label for="deliveryAddress" class="form-label">Adresse de livraison</label>
 					<input type="text" class="form-control" id="deliveryAddress" required
-						   [(ngModel)]="user.deliveryAddress"
+						   [(ngModel)]="user.deliveryAdress"
 						   name="deliveryAddress"
 						   #deliveryAddress="ngModel">
 					<span class="error" *ngIf="deliveryAddress.invalid && deliveryAddress.touched">Le champ est obligatoire.</span>

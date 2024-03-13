@@ -35,8 +35,8 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 					fullName: this.userService.getUserFullname(user!),
 					phoneNumber: user!.phoneNumber,
 					email: user!.email,
-					billingAdress: user!.billingAddress,
-					deliveryAdress: user!.deliveryAddress
+					billingAdress: user!.billingAdress,
+					deliveryAdress: user!.deliveryAdress
 				} as UserToDisplay
 			} as OrderToDisplay
 		})
@@ -54,8 +54,8 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 					fullName: this.userService.getUserFullname(this.currentUser!),
 					phoneNumber: this.currentUser!.phoneNumber,
 					email: this.currentUser!.email,
-					billingAdress: this.currentUser!.billingAddress,
-					deliveryAdress: this.currentUser!.deliveryAddress
+					billingAdress: this.currentUser!.billingAdress,
+					deliveryAdress: this.currentUser!.deliveryAdress
 				} as UserToDisplay
 			} as OrderToDisplay
 		})

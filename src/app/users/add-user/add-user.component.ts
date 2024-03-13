@@ -21,8 +21,8 @@ export class AddUserComponent {
 			email: form.value.emailAddress,
 			password: form.value.password,
 			dateOfBirth: form.value.dateOfBirth,
-			billingAddress: form.value.billingAddress,
-			deliveryAddress: form.value.deliveryAddress,
+			billingAdress: form.value.billingAddress,
+			deliveryAdress: form.value.deliveryAddress,
 			isAdmin: form.value.isAdmin
 		}
 		this.userService.addUser(newUser)

@@ -33,7 +33,7 @@ export class AccountComponent implements OnInit {
 		console.log("Account")
 		this.userService.getUserByToken().subscribe(user => {
 			this.user = user;
-			console.log(this.user?.firstName)
+			console.log(this.user)
 
 		})
 	}
