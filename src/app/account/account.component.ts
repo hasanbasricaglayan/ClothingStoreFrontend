@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
 import { UserToDisplay } from '../models/user-to-display';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-account',
@@ -11,7 +12,7 @@ import { UserToDisplay } from '../models/user-to-display';
 })
 export class AccountComponent implements OnInit{
 
-   constructor(private router: Router,private userService : UserService){}
+   constructor(private router: Router,private userService : UserService , private loginService : LoginService){}
   
    User? : User;
 
@@ -24,7 +25,7 @@ export class AccountComponent implements OnInit{
     }
 
     deconnect(){
-      localStorage.removeItem("token")
+      this.loginService.deconnection()
       this.router.navigate(["/login"])
     }
 
