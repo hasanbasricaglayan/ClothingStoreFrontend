@@ -102,7 +102,7 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 			this.orders = orders
 		})
 
-		this.getAllOrdersWithProductsOfAllUsersAdmin()
+		//this.getAllOrdersWithProductsOfAllUsersAdmin()
 
 		this.userService.getUserByToken().subscribe(user => {
 			this.currentUser = user;
