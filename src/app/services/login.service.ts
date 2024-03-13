@@ -43,7 +43,7 @@ export class LoginService {
 					localStorage.setItem("token", authToken);
 					console.log(localStorage.getItem("token"))
 					//une fois que l'utilisateur est connecté, je le redirige vers la liste des books
-					this.router.navigate(["/product-list"]);
+					this.router.navigate(["/products"]);
 				},
 				error: error => console.log(error),
 				complete: () => console.log("Complete")

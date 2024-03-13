@@ -72,20 +72,19 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 			})
 	}
 
-	// getAllOrdersOfUserWithProducts() {
-	// 	this.userService.getUserByIdWithOrdersAndProducts(this.currentUser!.userId!).subscribe(user => {
-	// 		this.currentUser = user
-	// 		this.orders = user.orders!
-	// 		this.ordersToDisplay = this.ordersToOrdersToDisplay()
-	// 	})
-	// }
-
+	getAllOrdersOfUserWithProducts() {
+		this.userService.getUserByIdWithOrdersAndProducts(this.currentUser!.userId!).subscribe(user => {
+			this.currentUser = user
+			this.orders = user.orders!
+			this.ordersToDisplay = this.ordersToOrdersToDisplay()
+		})
+	}
 
 	getOrdersWithUsers() {
-		this.userService.getUsers().pipe(
+		this.userService.getAllUsersWithOrdersAndProducts().pipe(
 			concatMap(users => {
 				this.users = users
-				return this.orderService.getOrders()
+				return this.orderService.getAllOrdersWithProducts()
 			})
 		)
 			.subscribe(orders => {
@@ -105,11 +104,11 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 
 		this.getAllOrdersWithProductsOfAllUsersAdmin()
 
-		// this.userService.getUserByToken().subscribe(user => {
-		// 	this.currentUser = user;
-		// 	console.log(this.currentUser?.firstName)
-		// 	this.getAllOrdersOfUserWithProducts()
-		// })
+		this.userService.getUserByToken().subscribe(user => {
+			this.currentUser = user;
+			console.log(this.currentUser?.firstName)
+			this.getAllOrdersOfUserWithProducts()
+		})
 	}
 
 	ngOnDestroy(): void {

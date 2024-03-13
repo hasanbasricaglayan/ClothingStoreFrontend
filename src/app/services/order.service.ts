@@ -13,14 +13,15 @@ export class OrderService {
 	readonly updatedOrders$ = this.updatedOrders$$.asObservable()
 
 	baseURL = "https://localhost:7108/api/Orders"
-	userUrl = "https://localhost:7108/api/Users"
-	constructor(private http: HttpClient) { }
+
 	options = {
 		headers: new HttpHeaders({
 			'content-type': 'application/json',
 			'authorization': 'Bearer ' + localStorage.getItem('token') || ''
 		})
 	}
+
+	constructor(private http: HttpClient) { }
 
 	getAllOrdersWithProducts(): Observable<OrderDTO[]> {
 		const URL = `${this.baseURL}/`
@@ -39,7 +40,7 @@ export class OrderService {
 		return this.http.get<OrderDTO>(URL, this.options)
 	}
 
-	getAllOrdersOfUserWithProducts(userId: number) {
+	getAllOrdersOfUserWithProducts(userId: number): Observable<OrderDTO[]> {
 		const URL = `https://localhost:7108/api/Users/${userId}/Orders`
 
 		return this.http.get<OrderDTO[]>(URL, this.options)
@@ -47,12 +48,6 @@ export class OrderService {
 
 	editOrder(orderId: number, order: OrderDTO): Observable<Order> {
 		const URL = `${this.baseURL}/${orderId}`
-
-		// const options = {
-		// 	headers: new HttpHeaders({
-		// 		'content-type': 'application/json'
-		// 	})
-		// }
 
 		return this.http.put<Order>(
 			URL,
