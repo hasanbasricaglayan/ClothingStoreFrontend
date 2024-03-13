@@ -1,30 +1,77 @@
-<p>account works!</p>
-
-<div class="container mt-8">
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <div class="card">
-          <div class="card-body">
-            <h2 class="card-title text-center mb-4">Account</h2>
-            <div class="infoPerso">
-            <label for="email">Email : </label><p> {{User?.email}}</p>
-            </div>
-            <div class="infoPerso">
-                <label for="prenom">Prenom : </label><p> {{User?.firstName}}</p>
-            </div>
-            <div class="infoPerso"><label for="nom">Nom : </label><p>{{User?.lastName}}</p></div>
-            <div class="infoPerso"><label for="date">Date de Naissaince : </label><p>{{User?.dateOfBirth}}</p></div>
-            <div class="infoPerso"><label for="num">Numeros de Telephone : </label><p>{{User?.phoneNumber}}</p></div>
-            <div class="infoPerso"><label for="nom">Adress de Paiement : </label><p>{{User?.billingAdress}}</p></div>
-            <div class="infoPerso"><label for="nom">Adress de Livraison : </label><p>{{User?.deliveryAdress}}</p></div>
-            
-            <div class="text-center mb-3">
-              <button class="btn btn-primary mr-2" style="margin: 3%;" (click)="goToEditPage()" >Edit Account</button>
-              <button class="btn btn-secondary" (click)="goToOrderPage()" >Order History</button>
-              <button class="btn btn-danger" style="margin: 3%;" (click)="deconnect()" >Déconnexion</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="row m-3">
+	<h2>Mon compte</h2>
+</div>
+<section class="bg-body-tertiary">
+	<div class="container pt-4">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-lg-8">
+				<div class="card mb-4">
+					<div class="card-body px-5">
+						<div class="row justify-content-center align-items-center text-center my-3">
+							<h2>Informations personnelles</h2>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Prénom et Nom</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.firstName + ' ' + user?.lastName}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Email</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.email}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Téléphone</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.phoneNumber}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Date de naissance</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.dateOfBirth}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Addresse de facturation</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.billingAddress}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Addresse de livraison</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.deliveryAddress}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="d-flex justify-content-center align-items-center gap-3">
+							<button class="btn btn-primary" (click)="goToEditPage()">Modifier</button>
+							<button class="btn btn-secondary" (click)="goToOrderPage()">Historique des commandes</button>
+							<button class="btn btn-danger" (click)="deconnect()">Se déconnecter</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

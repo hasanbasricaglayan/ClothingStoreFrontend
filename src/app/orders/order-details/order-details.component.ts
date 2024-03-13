@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { concatMap } from 'rxjs';
-import { Order } from '../../models/order';
-import { OrderDTO } from '../../models/order-dto';
+import { OrderProductDTO } from 'src/app/models/order-product/order-product-dto';
+import { OrderDTO } from 'src/app/models/order/order-dto';
+import { UserDTO } from 'src/app/models/user/user-dto';
+import { UserService } from 'src/app/services/user.service';
 import { OrderService } from '../../services/order.service';
 
 @Component({
@@ -12,36 +14,81 @@ import { OrderService } from '../../services/order.service';
 	styleUrls: ['./order-details.component.css']
 })
 export class OrderDetailsComponent implements OnInit {
-	order?: Order
-	//orderDTO?: OrderDTO
+	user?: UserDTO
+
+	orderProducts?: OrderProductDTO[]
 	orderStatus: string[] = ["En attente", "Validée", "Expédiée", "Livrée"]
 
-	constructor(private activatedRoute: ActivatedRoute, private router: Router, private orderService: OrderService) { }
+	order?: OrderDTO
+	selectedOrder?: OrderDTO
+	orderTotalPrice = 0
 
-	getOrderById() {
+	constructor(
+		private activatedRoute: ActivatedRoute,
+		private router: Router,
+		private orderService: OrderService,
+		private userService: UserService
+	) { }
+
+	showEditOrder(order: OrderDTO) {
+		this.selectedOrder = order
+	}
+
+	hideEditOrder() {
+		this.selectedOrder = undefined
+	}
+
+	getTotalPriceOfProduct(product: OrderProductDTO) {
+		return product.quantity * product.price
+	}
+
+	getTotalPriceOfOrder(orderProducts: OrderProductDTO[]) {
+		if (orderProducts == undefined) {
+			return 0
+		}
+		let totalPriceOfOrder = 0
+		for (let i = 0; i < orderProducts.length; i++) {
+			totalPriceOfOrder = totalPriceOfOrder + this.getTotalPriceOfProduct(orderProducts[i])
+		}
+		return totalPriceOfOrder
+	}
+
+	getOrderByIdWithUser() {
 		this.activatedRoute.params.pipe(
 			concatMap(params => {
 				const orderId = params['orderId']
-				return this.orderService.getOrderById(orderId)
+				return this.orderService.getOrderByIdWithProducts(orderId)
+			}),
+			concatMap(order => {
+				this.order = order
+				this.orderTotalPrice = this.getTotalPriceOfOrder(order.products)
+				return this.userService.getUserByIdWithOrdersAndProducts(order.userId)
 			})
 		)
 			.subscribe({
-				next: order => this.order = order,
+				next: user => {
+					this.user = user
+					console.log(this.order)
+				},
 				error: () => {
 					this.router.navigate(['/orders'])
 				}
 			})
 	}
 
-	editOrderStatus(form: NgForm) {
-		let orderDTO: OrderDTO = {
-			status: form.value.status
+	editOrder(form: NgForm) {
+		let order: OrderDTO = {
+			orderId: this.order!.orderId,
+			userId: this.order!.userId,
+			orderDate: this.order!.orderDate,
+			status: form.value.status,
+			products: this.order!.products
 		}
-		this.orderService.editOrder(this.order!.orderId, orderDTO)
+		this.orderService.editOrder(order.orderId!, order)
 			.subscribe(() => this.router.navigate(['/orders']))
 	}
 
 	ngOnInit(): void {
-		this.getOrderById()
+		this.getOrderByIdWithUser()
 	}
 }
