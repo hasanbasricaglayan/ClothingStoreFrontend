@@ -54,7 +54,8 @@ export class UserService {
 		const URL = this.baseURL
 		const options = {
 			headers: new HttpHeaders({
-				'content-type': 'application/json'
+				'content-type': 'application/json',
+				'authorization': 'Bearer ' + localStorage.getItem('token') || ''
 			})
 		}
 

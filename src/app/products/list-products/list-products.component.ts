@@ -26,7 +26,7 @@ export class ListProductsComponent implements OnInit, OnDestroy {
 				this.products = products
 			})
 		else
-			this.categoryService.getProductsOfCategory(+f).subscribe(products => {
+			this.productService.getProductsOfCategory(+f).subscribe(products => {
 				this.products = products
 			})
 	}
@@ -40,7 +40,7 @@ export class ListProductsComponent implements OnInit, OnDestroy {
 			this.products = products;
 		})
 
-		this.categoryService.getCategories().pipe(
+		this.categoryService.getAllCategoriesWithProducts().pipe(
 			concatMap(() => {
 				return this.productService.getProducts()
 			})

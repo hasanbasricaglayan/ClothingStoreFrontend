@@ -23,7 +23,7 @@ export class AddUserComponent {
 			dateOfBirth: form.value.dateOfBirth,
 			billingAddress: form.value.billingAddress,
 			deliveryAddress: form.value.deliveryAddress,
-			isAdmin: form.value.isAdmin
+			isAdmin: form.value.isAdmin || false
 		}
 		this.userService.addUser(newUser)
 		this.router.navigate(['/users'])

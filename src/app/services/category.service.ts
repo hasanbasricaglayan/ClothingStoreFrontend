@@ -1,9 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { CategoryDTO } from '../models/category/category-dto';
 import { ProductDTO } from '../models/product/product-dto';
-import { ProductService } from './product.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -19,9 +18,9 @@ export class CategoryService {
 
 	baseURL = "https://localhost:7108/api/Categories"
 
-	constructor(private http: HttpClient, private productService: ProductService) { }
+	constructor(private http: HttpClient) { }
 
-	getCategories() {
+	getAllCategoriesWithProducts(): Observable<CategoryDTO[]> {
 		const URL = `${this.baseURL}/`
 
 		this.http.get<CategoryDTO[]>(URL).subscribe(categories => {
@@ -32,32 +31,69 @@ export class CategoryService {
 		return this.updatedCategories$
 	}
 
-	getProductsOfCategory(categoryId: number) {
-		const URL = `${this.baseURL}/${categoryId}/Products`
-
-		this.http.get<ProductDTO[]>(URL).subscribe(products => {
-			this.products = products
-			this.updatedProducts$$.next([...this.products])
-		})
-
-		return this.updatedProducts$
-	}
-
 	getCategoryByIdWithProducts(categoryId: number): Observable<CategoryDTO> {
 		const URL = `${this.baseURL}/${categoryId}`
 
 		return this.http.get<CategoryDTO>(URL)
 	}
 
-	getProductById(productId: number): Observable<ProductDTO> {
-		const URL = `${this.baseURL}/${productId}`
+	// Admin
+	addCategory(category: CategoryDTO) {
+		const URL = this.baseURL
 
-		return this.http.get<ProductDTO>(URL)
+		const options = {
+			headers: new HttpHeaders({
+				'content-type': 'application/json',
+				'authorization': 'Bearer ' + localStorage.getItem('token') || ''
+			})
+		}
+
+		this.http.post<CategoryDTO>(
+			URL,
+			JSON.stringify({
+				Name: category.name
+			}),
+			options)
+			.subscribe(category => {
+				this.categories = [...this.categories, category]
+				this.updatedCategories$$.next([...this.categories])
+			})
 	}
 
-	getCategoryById(categoryId: number) {
+	// Admin
+	editCategory(categoryId: number, category: CategoryDTO): Observable<CategoryDTO> {
 		const URL = `${this.baseURL}/${categoryId}`
 
-		return this.http.get<CategoryDTO>(URL)
+		const options = {
+			headers: new HttpHeaders({
+				'content-type': 'application/json',
+				'authorization': 'Bearer ' + localStorage.getItem('token') || ''
+			})
+		}
+
+		return this.http.put<CategoryDTO>(
+			URL,
+			JSON.stringify({
+				Name: category.name
+			}),
+			options)
+	}
+
+	// Admin
+	deleteCategory(categoryId: number) {
+		const URL = `${this.baseURL}/${categoryId}`
+
+		const options = {
+			headers: new HttpHeaders({
+				'content-type': 'application/json',
+				'authorization': 'Bearer ' + localStorage.getItem('token') || ''
+			})
+		}
+
+		this.http.delete(URL, options)
+			.subscribe(() => {
+				this.categories = this.categories.filter(category => category.categoryId !== categoryId)
+				this.updatedCategories$$.next([...this.categories])
+			})
 	}
 }

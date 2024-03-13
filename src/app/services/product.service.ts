@@ -27,6 +27,17 @@ export class ProductService {
 		return this.updatedProducts$
 	}
 
+	getProductsOfCategory(categoryId: number) {
+		const URL = `https://localhost:7108/api/Categories/${categoryId}/Products`
+
+		this.http.get<ProductDTO[]>(URL).subscribe(products => {
+			this.products = products
+			this.updatedProducts$$.next([...this.products])
+		})
+
+		return this.updatedProducts$
+	}
+
 	getProductById(productId: number): Observable<ProductDTO> {
 		const URL = `${this.baseURL}/${productId}`
 
