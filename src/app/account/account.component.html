@@ -1,0 +1,77 @@
+<div class="row m-3">
+	<h2>Mon compte</h2>
+</div>
+<section class="bg-body-tertiary">
+	<div class="container pt-4">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-lg-8">
+				<div class="card mb-4">
+					<div class="card-body px-5">
+						<div class="row justify-content-center align-items-center text-center my-3">
+							<h2>Informations personnelles</h2>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Prénom et Nom</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.firstName + ' ' + user?.lastName}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Email</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.email}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Téléphone</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.phoneNumber}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Date de naissance</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.dateOfBirth}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Addresse de facturation</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.billingAddress}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Addresse de livraison</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.deliveryAddress}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="d-flex justify-content-center align-items-center gap-3">
+							<button class="btn btn-primary" (click)="goToEditPage()">Modifier</button>
+							<button class="btn btn-secondary" (click)="goToOrderPage()">Historique des commandes</button>
+							<button class="btn btn-danger" (click)="deconnect()">Se déconnecter</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
