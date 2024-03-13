@@ -15,6 +15,7 @@ import { OrderService } from '../../services/order.service';
 export class ListOrdersComponent implements OnInit, OnDestroy {
 	usersSubscription?: Subscription
 	users: UserDTO[] = []
+	currentUser?: UserDTO
 
 	ordersSubscription?: Subscription
 	orders: OrderDTO[] = []
@@ -22,7 +23,7 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 
 	constructor(private orderService: OrderService, private userService: UserService) { }
 
-	ordersToOrdersToDisplay(): OrderToDisplay[] {
+	adminOrdersToOrdersToDisplay(): OrderToDisplay[] {
 		return this.orders.map(order => {
 			const user = this.users.find(user => user.userId === order.userId)
 			return {
@@ -31,7 +32,7 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 				orderDate: order.orderDate,
 				status: order.status,
 				orderUser: {
-					fullName: this.userService.getUserFullName(user!),
+					fullName: this.userService.getUserFullname(user!),
 					phoneNumber: user!.phoneNumber,
 					email: user!.email,
 					billingAdress: user!.billingAddress,
@@ -41,16 +42,43 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 		})
 	}
 
-	getAllOrdersWithProductsOfAllUsers() {
+	ordersToOrdersToDisplay(): OrderToDisplay[] {
+		return this.orders.map(order => {
+			//const user = this.users.find(user => user.userId === order.userId)
+			return {
+				orderId: order.orderId,
+				userId: order.userId,
+				orderDate: order.orderDate,
+				status: order.status,
+				orderUser: {
+					fullName: this.userService.getUserFullname(this.currentUser!),
+					phoneNumber: this.currentUser!.phoneNumber,
+					email: this.currentUser!.email,
+					billingAdress: this.currentUser!.billingAddress,
+					deliveryAdress: this.currentUser!.deliveryAddress
+				} as UserToDisplay
+			} as OrderToDisplay
+		})
+	}
+
+	getAllOrdersWithProductsOfAllUsersAdmin() {
 		this.userService.getAllUsersWithOrdersAndProducts().pipe(
 			concatMap(() => {
 				return this.orderService.getAllOrdersWithProducts()
 			})
 		)
 			.subscribe(() => {
-				this.ordersToDisplay = this.ordersToOrdersToDisplay()
+				this.ordersToDisplay = this.adminOrdersToOrdersToDisplay()
 			})
 	}
+
+	// getAllOrdersOfUserWithProducts() {
+	// 	this.userService.getUserByIdWithOrdersAndProducts(this.currentUser!.userId!).subscribe(user => {
+	// 		this.currentUser = user
+	// 		this.orders = user.orders!
+	// 		this.ordersToDisplay = this.ordersToOrdersToDisplay()
+	// 	})
+	// }
 
 	ngOnInit(): void {
 		this.usersSubscription = this.userService.updatedUsers$.subscribe(users => {
@@ -61,7 +89,13 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 			this.orders = orders
 		})
 
-		this.getAllOrdersWithProductsOfAllUsers()
+		this.getAllOrdersWithProductsOfAllUsersAdmin()
+
+		// this.userService.getUserByToken().subscribe(user => {
+		// 	this.currentUser = user;
+		// 	console.log(this.currentUser?.firstName)
+		// 	this.getAllOrdersOfUserWithProducts()
+		// })
 	}
 
 	ngOnDestroy(): void {

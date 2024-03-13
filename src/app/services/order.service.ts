@@ -15,11 +15,17 @@ export class OrderService {
 	baseURL = "https://localhost:7108/api/Orders"
 
 	constructor(private http: HttpClient) { }
+	options = {
+		headers: new HttpHeaders({
+			'content-type': 'application/json',
+			'authorization': 'Bearer ' + localStorage.getItem('token') || ''
+		})
+	}
 
 	getAllOrdersWithProducts(): Observable<OrderDTO[]> {
 		const URL = `${this.baseURL}/`
 
-		this.http.get<OrderDTO[]>(URL).subscribe(orders => {
+		this.http.get<OrderDTO[]>(URL, this.options).subscribe(orders => {
 			this.orders = orders
 			this.updatedOrders$$.next([...this.orders])
 		})
@@ -30,17 +36,23 @@ export class OrderService {
 	getOrderByIdWithProducts(orderId: number): Observable<OrderDTO> {
 		const URL = `${this.baseURL}/${orderId}`
 
-		return this.http.get<OrderDTO>(URL)
+		return this.http.get<OrderDTO>(URL, this.options)
 	}
 
-	editOrder(order: OrderDTO): Observable<Order> {
-		const URL = `${this.baseURL}/${order.orderId}`
+	getAllOrdersOfUserWithProducts(userId: number) {
+		const URL = `https://localhost:7108/api/Users/${userId}/Orders`
 
-		const options = {
-			headers: new HttpHeaders({
-				'content-type': 'application/json'
-			})
-		}
+		return this.http.get<OrderDTO[]>(URL, this.options)
+	}
+
+	editOrder(orderId: number, order: OrderDTO): Observable<Order> {
+		const URL = `${this.baseURL}/${orderId}`
+
+		// const options = {
+		// 	headers: new HttpHeaders({
+		// 		'content-type': 'application/json'
+		// 	})
+		// }
 
 		return this.http.put<Order>(
 			URL,
@@ -49,6 +61,6 @@ export class OrderService {
 				OrderDate: order.orderDate,
 				Status: order.status
 			}),
-			options)
+			this.options)
 	}
 }

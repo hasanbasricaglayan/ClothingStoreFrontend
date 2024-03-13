@@ -1,1 +1,40 @@
-<p>list-users works!</p>
+<div class="row m-3">
+	<h2>Utilisateurs</h2>
+</div>
+<div class="addUserButton">
+	<button class="btn btn-success" [routerLink]="['/users', 'add']">Ajouter un utilisateur</button>
+</div>
+<table class="table table-striped text-center">
+	<thead class="align-middle">
+		<tr>
+			<th>Identifiant</th>
+			<th>Prénom</th>
+			<th>Nom</th>
+			<th>Téléphone</th>
+			<th>Email</th>
+			<th>Mot de passe</th>
+			<th>Date de naissance</th>
+			<th>Adresse de facturation</th>
+			<th>Adresse de livraison</th>
+			<th>Admin ?</th>
+			<th>Editer</th>
+			<th>Supprimer</th>
+		</tr>
+	</thead>
+	<tbody class="align-middle">
+		<tr *ngFor="let user of users">
+			<td>{{user.userId}}</td>
+			<td>{{user.firstName}}</td>
+			<td>{{user.lastName}}</td>
+			<td>{{user.phoneNumber}}</td>
+			<td>{{user.email}}</td>
+			<td>{{user.password}}</td>
+			<td>{{user.dateOfBirth}}</td>
+			<td>{{user.billingAddress}}</td>
+			<td>{{user.deliveryAddress}}</td>
+			<td>{{user.isAdmin}}</td>
+			<td><button class="btn btn-primary" [routerLink]="['/users', 'edit', user.userId]">Editer</button></td>
+			<td><button class="btn btn-danger" (click)="deleteUser(user.userId!)">Supprimer</button></td>
+		</tr>
+	</tbody>
+</table>

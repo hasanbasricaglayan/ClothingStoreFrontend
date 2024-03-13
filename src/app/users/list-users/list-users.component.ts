@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UserDTO } from 'src/app/models/user/user-dto';
-import { UserToDisplay } from 'src/app/models/user/user-to-display';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,12 +11,19 @@ import { UserService } from 'src/app/services/user.service';
 export class ListUsersComponent implements OnInit, OnDestroy {
 	usersSubscription?: Subscription
 	users: UserDTO[] = []
-	usersToDisplay?: UserToDisplay[]
 
 	constructor(private userService: UserService) { }
 
+	deleteUser(userId: number) {
+		if (confirm("Etes-vous sûr de vouloir supprimer l'utlisateur ?"))
+			this.userService.deleteUser(userId)
+	}
+
 	ngOnInit(): void {
-		throw new Error('Method not implemented.');
+		this.usersSubscription = this.userService.updatedUsers$.subscribe(users => {
+			this.users = users
+		})
+		this.userService.getAllUsersWithOrdersAndProducts().pipe().subscribe()
 	}
 
 	ngOnDestroy(): void {

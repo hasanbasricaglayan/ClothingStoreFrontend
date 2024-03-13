@@ -11,5 +11,5 @@ export interface UserDTO {
 	billingAddress: string
 	deliveryAddress: string
 	isAdmin: boolean
-	orders: OrderDTO[]
+	orders?: OrderDTO[]
 }

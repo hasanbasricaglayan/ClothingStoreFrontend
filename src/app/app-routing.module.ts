@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountComponent } from './account/account.component';
+import { EditUserComponent } from './account/edit-user/edit-user.component';
+import { LoginComponent } from './login/login.component';
+import { authGuardGuard } from './shared/auth.guard';
 
 const routes: Routes = [
 	{
@@ -13,8 +17,11 @@ const routes: Routes = [
 	{
 		path: "orders",
 		loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule),
-	}
-	//{ path: "", component: LoginComponent }
+		canActivate: [authGuardGuard]
+	},
+	{ path: "login", component: LoginComponent },
+	{ path: "account", component: AccountComponent, canActivate: [authGuardGuard] },
+	{ path: "edit-user", component: EditUserComponent, canActivate: [authGuardGuard] }
 ];
 
 @NgModule({

@@ -16,7 +16,7 @@ export class UserService {
 
 	constructor(private http: HttpClient) { }
 
-	getUserFullName(user: UserDTO) {
+	getUserFullname(user: UserDTO) {
 		return `${user.firstName} ${user.lastName}`
 	}
 
@@ -37,21 +37,33 @@ export class UserService {
 		return this.http.get<UserDTO>(URL)
 	}
 
-	editUser(userId: number, user: UserDTO): Observable<User> {
-		const URL = `${this.baseURL}/${userId}`
+	getUserByToken(): Observable<UserDTO> {
+		var authURL = "https://localhost:7108/api/auth"
+		var options = {
+			headers: new HttpHeaders(
+				{
+					'content-type': "application/json",
+					'authorization': 'Bearer ' + localStorage.getItem('token') || ''
+				}
+			)
+		}
+		return this.http.get<UserDTO>(authURL, options)
+	}
 
+	addUser(user: UserDTO) {
+		const URL = this.baseURL
 		const options = {
 			headers: new HttpHeaders({
 				'content-type': 'application/json'
 			})
 		}
 
-		return this.http.put<User>(
+		this.http.post<UserDTO>(
 			URL,
 			JSON.stringify({
 				FirstName: user.firstName,
 				LastName: user.lastName,
-				PhoneNumbe: user.phoneNumber,
+				PhoneNumber: user.phoneNumber,
 				Email: user.email,
 				Password: user.password,
 				DateOfBirth: user.dateOfBirth,
@@ -60,5 +72,44 @@ export class UserService {
 				IsAdmin: user.isAdmin
 			}),
 			options)
+			.subscribe(user => {
+				this.users = [...this.users, user]
+				this.updatedUsers$$.next([...this.users])
+			})
+	}
+
+	editUser(userId: number, user: UserDTO): Observable<User> {
+		const URL = `${this.baseURL}/${userId}`
+
+		const options = {
+			headers: new HttpHeaders({
+				'content-type': 'application/json',
+				'authorization': 'Bearer ' + localStorage.getItem('token') || ''
+			})
+		}
+
+		return this.http.put<User>(
+			URL,
+			JSON.stringify({
+				FirstName: user.firstName,
+				LastName: user.lastName,
+				PhoneNumber: user.phoneNumber,
+				Email: user.email,
+				Password: user.password,
+				DateOfBirth: user.dateOfBirth,
+				BillingAddress: user.billingAddress,
+				DeliveryAddress: user.deliveryAddress,
+				IsAdmin: user.isAdmin
+			}),
+			options)
+	}
+
+	deleteUser(userId: number) {
+		const URL = `${this.baseURL}/${userId}`
+		this.http.delete(URL)
+			.subscribe(() => {
+				this.users = this.users.filter(user => user.userId !== userId)
+				this.updatedUsers$$.next([...this.users])
+			})
 	}
 }

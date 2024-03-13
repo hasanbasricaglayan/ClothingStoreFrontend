@@ -84,7 +84,7 @@ export class OrderDetailsComponent implements OnInit {
 			status: form.value.status,
 			products: this.order!.products
 		}
-		this.orderService.editOrder(order)
+		this.orderService.editOrder(order.orderId!, order)
 			.subscribe(() => this.router.navigate(['/orders']))
 	}
 

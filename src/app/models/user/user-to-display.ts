@@ -1,4 +1,3 @@
-
 export interface UserToDisplay {
 	userId?: number
 	firstName: string
