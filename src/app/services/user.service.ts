@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { User } from '../models/user/user';
 import { UserDTO } from '../models/user/user-dto';
 
 @Injectable({
@@ -16,7 +15,7 @@ export class UserService {
 
 	constructor(private http: HttpClient) { }
 
-	getUserFullname(user: UserDTO) {
+	getUserFullname(user: UserDTO): string {
 		return `${user.firstName} ${user.lastName}`
 	}
 
@@ -38,23 +37,25 @@ export class UserService {
 	}
 
 	getUserByToken(): Observable<UserDTO> {
-		var authURL = "https://localhost:7108/api/auth"
-		var options = {
-			headers: new HttpHeaders(
-				{
-					'content-type': "application/json",
-					'authorization': 'Bearer ' + localStorage.getItem('token') || ''
-				}
-			)
+		const authURL = "https://localhost:7108/api/auth"
+
+		const options = {
+			headers: new HttpHeaders({
+				'content-type': "application/json",
+				'authorization': 'Bearer ' + localStorage.getItem('token') || ''
+			})
 		}
+
 		return this.http.get<UserDTO>(authURL, options)
 	}
 
 	addUser(user: UserDTO) {
 		const URL = this.baseURL
+
 		const options = {
 			headers: new HttpHeaders({
-				'content-type': 'application/json'
+				'content-type': 'application/json',
+				'authorization': 'Bearer ' + localStorage.getItem('token') || ''
 			})
 		}
 
@@ -67,9 +68,9 @@ export class UserService {
 				Email: user.email,
 				Password: user.password,
 				DateOfBirth: user.dateOfBirth,
-				BillingAdress: user.billingAdress,
-				DeliveryAdress: user.deliveryAdress,
-				IsAdmin: user.isAdmin
+				BillingAddress: user.billingAddress,
+				DeliveryAddress: user.deliveryAddress,
+				IsAdmin: user.isAdmin || false
 			}),
 			options)
 			.subscribe(user => {
@@ -78,7 +79,7 @@ export class UserService {
 			})
 	}
 
-	editUser(userId: number, user: UserDTO): Observable<User> {
+	editUser(userId: number, user: UserDTO): Observable<UserDTO> {
 		const URL = `${this.baseURL}/${userId}`
 
 		const options = {
@@ -88,7 +89,7 @@ export class UserService {
 			})
 		}
 
-		return this.http.put<User>(
+		return this.http.put<UserDTO>(
 			URL,
 			JSON.stringify({
 				FirstName: user.firstName,
@@ -97,19 +98,19 @@ export class UserService {
 				Email: user.email,
 				Password: user.password,
 				DateOfBirth: user.dateOfBirth,
-				BillingAddress: user.billingAdress,
-				DeliveryAddress: user.deliveryAdress,
-				IsAdmin: user.isAdmin
+				BillingAddress: user.billingAddress,
+				DeliveryAddress: user.deliveryAddress,
+				IsAdmin: user.isAdmin || false
 			}),
 			options)
 	}
 
 	deleteUser(userId: number) {
 		const URL = `${this.baseURL}/${userId}`
-		this.http.delete(URL)
-			.subscribe(() => {
-				this.users = this.users.filter(user => user.userId !== userId)
-				this.updatedUsers$$.next([...this.users])
-			})
+
+		this.http.delete(URL).subscribe(() => {
+			this.users = this.users.filter(user => user.userId !== userId)
+			this.updatedUsers$$.next([...this.users])
+		})
 	}
 }

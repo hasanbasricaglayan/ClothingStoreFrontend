@@ -10,6 +10,7 @@ import { LoginService } from '../services/login.service';
 	styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
+	user?: UserDTO
 
 
 	constructor(private router: Router, private userService: UserService , private loginService : LoginService) { }
@@ -23,7 +24,7 @@ export class AccountComponent implements OnInit {
 		else{
 			this.role=true;
 		}
-		
+
 	}
 
 	goToAdminUsersListPage() {
@@ -37,7 +38,7 @@ export class AccountComponent implements OnInit {
 		this.router.navigate(["/edit-user"]);
 	}
 
-	goToOrderPage() {
+	goToOrdersPage() {
 		this.router.navigate(["/orders"]);
 	}
 
@@ -47,8 +48,6 @@ export class AccountComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-
-		console.log("Account")
 		this.userService.getUserByToken().subscribe(user => {
 			this.user = user;
 			//console.log(this.user)

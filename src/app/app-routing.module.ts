@@ -14,6 +14,10 @@ const routes: Routes = [
 		canActivate: [authGuardGuard,authGuardGuardAdmin]
 	},
 	{
+		path: "categories",
+		loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule),
+	},
+	{
 		path: "products",
 		loadChildren: () => import('./products/products.module').then(m => m.ProductsModule),
 	},

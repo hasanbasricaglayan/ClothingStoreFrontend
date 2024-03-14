@@ -1,21 +1,27 @@
-<div class="product-details">
-	<div class="product-image">
-		<img [src]="product?.imageURL" alt="{{ product?.name }}">
+<section class="py-5">
+	<div class="container px-4 px-lg-5 my-5">
+		<div class="row gx-4 gx-lg-5 align-items-center">
+			<div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{product?.imageURL}}" alt="..." /></div>
+			<div class="col-md-6">
+				<div class="mb-3">Référence : <strong>{{product?.productId}}</strong></div>
+				<div class="mb-3">Catégorie : <strong>{{category?.name}}</strong></div>
+				<h2 class="mb-3">{{product?.brand}}</h2>
+				<h1 class="fw-bolder mb-3">{{product?.name}}</h1>
+				<div class="mb-3">Couleur : <strong>{{product?.color}}</strong></div>
+				<div class="mb-3">Taille : <strong>{{product?.size}}</strong></div>
+				<div class="fs-5 mb-3">
+					<span><strong style="color: chocolate;">{{product?.price}} €</strong></span>
+				</div>
+				<div class="d-flex mb-5">
+					<input style="max-width: 10rem;" type="number" class="form-control text-center me-3" id="quantityToCart"
+						   value="1"
+						   min="1"
+						   max={{product?.quantityInStock}} />
+					<button class="btn btn-primary"><i class="bi bi-bag-fill"></i> Ajouter au panier</button>
+				</div>
+				<h4>Détails du produit</h4>
+				<p class="lead">{{product?.description}}</p>
+			</div>
+		</div>
 	</div>
-	<div class="product-info">
-		<h2>{{ product?.name }}</h2>
-		<p class="description">Description : {{ product?.description }}</p>
-		<p class="brand">Marque : <strong>{{ product?.brand }}</strong></p>
-		<p class="category">Catégorie : <strong>{{ category?.name }}</strong></p>
-		<p class="color">Couleur : <strong>{{ product?.color }}</strong></p>
-		<p class="size">Taille : <strong>{{ product?.size }}</strong></p>
-		<p class="price">Prix : <strong style="color: chocolate;">{{ product?.price }} € </strong> </p>
-		<form #form="ngForm" (ngSubmit)="addTocart(form)" role="addToCart">
-			<input type="number" name="quantité a ajouter au panier" id="Qtt" min="1" max={{product?.quantityInStock}} ngModel
-			name="add"
-			#add>
-			<button class="btn btn-info" type="submit">Ajouter au panier</button>
-		</form>
-
-	</div>
-</div>
+</section>

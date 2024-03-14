@@ -1,10 +1,12 @@
-<div class="row m-3">
-	<h2>Utilisateurs</h2>
+<div class="row align-items-center m-3">
+	<div class="col-auto">
+		<h2>Utilisateurs</h2>
+	</div>
+	<div class="col-auto">
+		<button class="btn btn-success" [routerLink]="['/users', 'add']">Ajouter</button>
+	</div>
 </div>
-<div class="addUserButton">
-	<button class="btn btn-success" [routerLink]="['/users', 'add']">Ajouter un utilisateur</button>
-</div>
-<table class="table table-striped text-center">
+<table class="table table-striped table-bordered text-center">
 	<thead class="align-middle">
 		<tr>
 			<th>Identifiant</th>
@@ -17,7 +19,7 @@
 			<th>Adresse de facturation</th>
 			<th>Adresse de livraison</th>
 			<th>Admin ?</th>
-			<th>Editer</th>
+			<th>Modifier</th>
 			<th>Supprimer</th>
 		</tr>
 	</thead>
@@ -29,11 +31,11 @@
 			<td>{{user.phoneNumber}}</td>
 			<td>{{user.email}}</td>
 			<td>{{user.password}}</td>
-			<td>{{user.dateOfBirth}}</td>
-			<td>{{user.billingAdress}}</td>
-			<td>{{user.deliveryAdress}}</td>
+			<td>{{user.dateOfBirth | date : 'dd/MM/yyyy'}}</td>
+			<td>{{user.billingAddress}}</td>
+			<td>{{user.deliveryAddress}}</td>
 			<td>{{user.isAdmin}}</td>
-			<td><button class="btn btn-primary" [routerLink]="['/users', 'edit', user.userId]">Editer</button></td>
+			<td><button class="btn btn-primary" [routerLink]="['/users', 'edit', user.userId]">Modifier</button></td>
 			<td><button class="btn btn-danger" (click)="deleteUser(user.userId!)">Supprimer</button></td>
 		</tr>
 	</tbody>

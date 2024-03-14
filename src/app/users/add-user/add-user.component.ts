@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AddUserComponent {
 
-	constructor(private userService: UserService, private router: Router) { }
+	constructor(private router: Router, private userService: UserService) { }
 
 	addUser(form: NgForm) {
 		let newUser: UserDTO = {
@@ -21,9 +21,9 @@ export class AddUserComponent {
 			email: form.value.emailAddress,
 			password: form.value.password,
 			dateOfBirth: form.value.dateOfBirth,
-			billingAdress: form.value.billingAddress,
-			deliveryAdress: form.value.deliveryAddress,
-			isAdmin: form.value.isAdmin
+			billingAddress: form.value.billingAddress,
+			deliveryAddress: form.value.deliveryAddress,
+			isAdmin: form.value.isAdmin || false
 		}
 		this.userService.addUser(newUser)
 		this.router.navigate(['/users'])

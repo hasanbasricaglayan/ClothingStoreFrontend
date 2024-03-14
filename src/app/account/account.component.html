@@ -43,7 +43,7 @@
 								<p class="mb-0"><strong>Date de naissance</strong></p>
 							</div>
 							<div class="col-sm-8">
-								<p class="mb-0">{{user?.dateOfBirth}}</p>
+								<p class="mb-0">{{user?.dateOfBirth | date : 'dd/MM/yyyy'}}</p>
 							</div>
 						</div>
 						<hr>
@@ -67,8 +67,7 @@
 						<hr>
 						<div class="d-flex justify-content-center align-items-center gap-3">
 							<button class="btn btn-primary" (click)="goToEditPage()">Modifier</button>
-							<button class="btn btn-secondary" (click)="goToOrderPage()">Historique des
-								commandes</button>
+							<button class="btn btn-secondary" (click)="goToOrdersPage()">Historique des commandes</button>
 							<button class="btn btn-danger" (click)="deconnect()">Se déconnecter</button>
 						</div>
 					</div>

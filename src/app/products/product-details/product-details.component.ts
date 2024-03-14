@@ -39,7 +39,7 @@ export class ProductDetailsComponent implements OnInit {
 			}),
 			concatMap(product => {
 				this.product = product
-				return this.categoryService.getCategoryById(product.categoryId)
+				return this.categoryService.getCategoryByIdWithProducts(product.categoryId)
 			})
 		)
 			.subscribe({

@@ -12,23 +12,22 @@ import { ResearchService } from 'src/app/services/research.service';
 	styleUrls: ['./list-products.component.css']
 })
 export class ListProductsComponent implements OnInit, OnDestroy {
+	categoriesSubscription?: Subscription
+	categories: CategoryDTO[] = []
 
 	productsSubscription?: Subscription
 	products: ProductDTO[] = []
 	filteredProducts?: ProductDTO[]
 
-	categoriesSubscription?: Subscription
-	categories: CategoryDTO[] = []
+	constructor(private productService: ProductService, private categoryService: CategoryService) { }
 
-	constructor(private productService: ProductService, private categoryService: CategoryService,private researchService : ResearchService) { }
-
-	filterProducts(f: number) {
-		if (f == 0)
-			this.productService.getProducts().subscribe(products => {
+	filterProducts(categoryFilter: number) {
+		if (categoryFilter == 0)
+			this.productService.getAllProducts().subscribe(products => {
 				this.products = products
 			})
 		else
-			this.categoryService.getProductsOfCategory(+f).subscribe(products => {
+			this.productService.getAllProductsOfCategory(+categoryFilter).subscribe(products => {
 				this.products = products
 			})
 	}
@@ -49,12 +48,12 @@ export class ListProductsComponent implements OnInit, OnDestroy {
 		})
 
 		this.productsSubscription = this.productService.updatedProducts$.subscribe(products => {
-			this.products = products;
+			this.products = products
 		})
 
-		this.categoryService.getCategories().pipe(
+		this.categoryService.getAllCategoriesWithProducts().pipe(
 			concatMap(() => {
-				return this.productService.getProducts()
+				return this.productService.getAllProducts()
 			})
 		).subscribe()
 		this.researchService.data$.subscribe(data => {
@@ -68,6 +67,6 @@ export class ListProductsComponent implements OnInit, OnDestroy {
 		this.categoriesSubscription?.unsubscribe()
 		this.productsSubscription?.unsubscribe()
 
-		
+
 	}
 }

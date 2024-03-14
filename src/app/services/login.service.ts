@@ -27,7 +27,7 @@ export class LoginService {
         return true
     }
 
-    
+
     isAdminAuthenticated(): boolean {
         if (localStorage.getItem("role") == "client")
             return false
@@ -80,25 +80,25 @@ export class LoginService {
                     this.getRole()
                     //une fois que l'utilisateur est connecté, je le redirige vers la liste des books
                     this.router.navigate(["/products"]);
-                    
+
                 },
                 error: error => console.log(error),
                 complete: () => console.log("Complete")
             }
         )
 
-        
+
         //console.log(localStorage.getItem("role"))
 
     }
 
     deconnection(){
-        
+
          localStorage.removeItem("token")
          if (localStorage.getItem("role")) {
             localStorage.removeItem("role")
          }
-         
-        
+
+
     }
 }
