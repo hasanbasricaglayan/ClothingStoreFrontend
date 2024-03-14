@@ -13,11 +13,12 @@
 					<span><strong style="color: chocolate;">{{product?.price}} €</strong></span>
 				</div>
 				<div class="d-flex mb-5">
-					<input style="max-width: 10rem;" type="number" class="form-control text-center me-3" id="quantityToCart"
-						   value="1"
-						   min="1"
-						   max={{product?.quantityInStock}} />
-					<button class="btn btn-primary"><i class="bi bi-bag-fill"></i> Ajouter au panier</button>
+					<form #form="ngForm" (ngSubmit)="addTocart(form)" role="addToCart">
+						<input style="max-width: 10rem;" type="number" class="form-control text-center me-3"
+							id="quantityToCart" value="1" min="1" max={{product?.quantityInStock}} ngModel name="add"
+							#add />
+						<button class="btn btn-primary"><i class="bi bi-bag-fill"></i> Ajouter au panier</button>
+					</form>
 				</div>
 				<h4>Détails du produit</h4>
 				<p class="lead">{{product?.description}}</p>
