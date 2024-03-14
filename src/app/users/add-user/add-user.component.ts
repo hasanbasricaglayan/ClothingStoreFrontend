@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AddUserComponent {
 
-	constructor(private userService: UserService, private router: Router) { }
+	constructor(private router: Router, private userService: UserService) { }
 
 	addUser(form: NgForm) {
 		let newUser: UserDTO = {
