@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { authGuardGuard, authGuardGuardAdmin } from './shared/auth.guard';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { ListProductsComponent } from './products/list-products/list-products.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
 	{
@@ -22,10 +23,16 @@ const routes: Routes = [
 		loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule),
 		canActivate: [authGuardGuard]
 	},
+	{
+		path: "categories",
+		loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule),
+		canActivate: [authGuardGuard,authGuardGuardAdmin]
+	},
 	{ path: "login", component: LoginComponent },
 	{ path: "account", component: AccountComponent, canActivate: [authGuardGuard] },
 	{ path: "edit-user", component: EditUserComponent, canActivate: [authGuardGuard] },
 	{ path: "sign-in", component: SignInComponent },
+	{ path: "cart",component:CartComponent },
 	{path : '', component : ListProductsComponent}
 ];
 
