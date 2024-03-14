@@ -103,12 +103,18 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 		})
 
 		//this.getAllOrdersWithProductsOfAllUsersAdmin()
+		if (localStorage.getItem("role") == "admin") {
+			this.getAllOrdersWithProductsOfAllUsersAdmin()
+		}
+		else{
+			this.userService.getUserByToken().subscribe(user => {
+				this.currentUser = user;
+				console.log(this.currentUser?.firstName)
+				this.getAllOrdersOfUserWithProducts()
+			})
 
-		this.userService.getUserByToken().subscribe(user => {
-			this.currentUser = user;
-			console.log(this.currentUser?.firstName)
-			this.getAllOrdersOfUserWithProducts()
-		})
+		}
+		
 	}
 
 	ngOnDestroy(): void {

@@ -15,7 +15,7 @@ import { OrderService } from '../../services/order.service';
 })
 export class OrderDetailsComponent implements OnInit {
 	user?: UserDTO
-
+	IsAdmin? : boolean
 	orderProducts?: OrderProductDTO[]
 	orderStatus: string[] = ["En attente", "Validée", "Expédiée", "Livrée"]
 
@@ -90,5 +90,12 @@ export class OrderDetailsComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getOrderByIdWithUser()
+
+		if (localStorage.getItem("role") == "admin") {
+			this.IsAdmin = true
+		}else {
+			this.IsAdmin = false
+		}
+		console.log(this.IsAdmin)
 	}
 }
