@@ -11,22 +11,22 @@ import { ProductService } from '../../services/product.service';
 	styleUrls: ['./list-products.component.css']
 })
 export class ListProductsComponent implements OnInit, OnDestroy {
+	categoriesSubscription?: Subscription
+	categories: CategoryDTO[] = []
+
 	productsSubscription?: Subscription
 	products: ProductDTO[] = []
 	filteredProducts?: ProductDTO[]
 
-	categoriesSubscription?: Subscription
-	categories: CategoryDTO[] = []
+	constructor(private categoryService: CategoryService, private productService: ProductService) { }
 
-	constructor(private productService: ProductService, private categoryService: CategoryService) { }
-
-	filterProducts(f: number) {
-		if (f == 0)
+	filterProducts(categoryFilter: number) {
+		if (categoryFilter == 0)
 			this.productService.getAllProducts().subscribe(products => {
 				this.products = products
 			})
 		else
-			this.productService.getAllProductsOfCategory(+f).subscribe(products => {
+			this.productService.getAllProductsOfCategory(+categoryFilter).subscribe(products => {
 				this.products = products
 			})
 	}
@@ -37,7 +37,7 @@ export class ListProductsComponent implements OnInit, OnDestroy {
 		})
 
 		this.productsSubscription = this.productService.updatedProducts$.subscribe(products => {
-			this.products = products;
+			this.products = products
 		})
 
 		this.categoryService.getAllCategoriesWithProducts().pipe(
