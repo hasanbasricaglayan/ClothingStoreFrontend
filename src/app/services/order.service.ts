@@ -92,18 +92,23 @@ export class OrderService {
 		console.log(OrderD);
 	}
 	
-	 addToCart(order: { product: ProductDTO, quantity: number; }) {
+	addToCart(order: { product: ProductDTO, quantity: number; }) {
 		const deSerializedOrders = localStorage.getItem('orders');
     let orders: { product: ProductDTO, quantity: number; }[] = [];
     
     if (deSerializedOrders) {
         orders = JSON.parse(deSerializedOrders);
     }
-    
-    orders.push(order);
-    
+	var productAlreadyExist = orders.find(o => o.product.name == order.product.name)
+	console.log(productAlreadyExist)
+    if(productAlreadyExist){
+		console.log(productAlreadyExist)
+		productAlreadyExist!.quantity += order.quantity
+	}
+	else{
+		orders.push(order);
+	}
     localStorage.setItem('orders', JSON.stringify(orders));
-    
     console.log(JSON.parse(localStorage.getItem('orders')!));
 	}
 }
