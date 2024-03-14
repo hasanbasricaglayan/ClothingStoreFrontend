@@ -10,9 +10,11 @@
 		<p class="color">Couleur : <strong>{{ product?.color }}</strong></p>
 		<p class="size">Taille : <strong>{{ product?.size }}</strong></p>
 		<p class="price">Prix : <strong style="color: chocolate;">{{ product?.price }} € </strong> </p>
-		<form #f="">
-			<input type="number" name="quantité a ajouter au panier" id="Qtt" min="1" max={{product?.quantityInStock}}>
-			<button class="btn btn-info">Ajouter au panier</button>
+		<form #form="ngForm" (ngSubmit)="addTocart(form)" role="addToCart">
+			<input type="number" name="quantité a ajouter au panier" id="Qtt" min="1" max={{product?.quantityInStock}} ngModel
+			name="add"
+			#add>
+			<button class="btn btn-info" type="submit">Ajouter au panier</button>
 		</form>
 
 	</div>

@@ -15,7 +15,7 @@ import { SignInComponent } from './login/sign-in/sign-in.component';
 		LoginComponent,
 		AccountComponent,
 		EditUserComponent,
-  SignInComponent,
+  		SignInComponent,
 	],
 	imports: [
 		BrowserModule,
