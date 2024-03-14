@@ -1,0 +1,117 @@
+<div class="row m-3">
+	<h2>Panier</h2>
+</div>
+<section class="bg-body-tertiary">
+	<div class="container pt-4">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="card mb-4">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-3">
+								<p class="mb-0"><strong>Prénom et Nom</strong></p>
+							</div>
+							<div class="col-sm-9">
+								<p class="mb-0">{{user?.firstName + ' ' + user?.lastName}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<p class="mb-0"><strong>Email</strong></p>
+							</div>
+							<div class="col-sm-9">
+								<p class="mb-0">{{user?.email}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<p class="mb-0"><strong>Téléphone</strong></p>
+							</div>
+							<div class="col-sm-9">
+								<p class="mb-0">{{user?.phoneNumber}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<p class="mb-0"><strong>Addresse de facturation</strong></p>
+							</div>
+							<div class="col-sm-9">
+								<p class="mb-0">{{user?.billingAdress}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-3">
+								<p class="mb-0"><strong>Addresse de livraison</strong></p>
+							</div>
+							<div class="col-sm-9">
+								<p class="mb-0">{{user?.deliveryAdress}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="card mb-4">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-3">
+								<p class="mb-0"><strong>Date</strong></p>
+							</div>
+							<div class="col-sm-9">
+								<p class="mb-0">{{orders?.orderDate | date : "dd/MM/yyyy"}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<div class="card mb-4">
+					<div class="card-body py-0">
+						<div class="row">
+							<table class="table text-center">
+								<thead class="align-middle">
+									<tr>
+										<th>Quantité</th>
+										<th>Référence article</th>
+										<th>Marque</th>
+										<th>Article</th>
+										<th>Couleur</th>
+										<th>Taille</th>
+										<th>Prix actuel [€]</th>
+										<th>Prix unitaire [€]</th>
+										<th>Prix total [€]</th>
+                                        <th> </th>
+									</tr>
+								</thead>
+								<tbody class="align-middle">
+									<tr *ngFor="let orderP of orders?.products">
+										<td>{{orderP.quantity}}</td>
+										<td>{{orderP.productId}}</td>
+										<td>{{orderP.product!.brand}}</td>
+										<td>{{orderP.product!.name}}</td>
+										<td>{{orderP.product!.color}}</td>
+										<td>{{orderP.product!.size}}</td>
+										<td>{{orderP.product!.price  }}</td>
+										<td>{{orderP.price}}</td>
+										<td>{{getTotalPriceOfProduct(orderP)}}</td>
+                                        <button (click)="deleteOrderProduct(orderP.product!.name)" ></button>
+									</tr>
+									<tr>
+										<td colspan="8"></td>
+										<td colspan="1"><strong>{{orderTotalPrice}}</strong></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -98,7 +98,10 @@ export class LoginService {
          if (localStorage.getItem("role")) {
             localStorage.removeItem("role")
          }
-
-
+         if (localStorage.getItem("orders")) {
+            localStorage.removeItem("orders")
+         }
+         
+        
     }
 }

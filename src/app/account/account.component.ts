@@ -24,6 +24,9 @@ export class AccountComponent implements OnInit {
 
 	}
 
+	goToAminCategoriesList(){
+		this.router.navigate(["/categories"]);
+	}
 	goToAdminUsersListPage() {
 		this.router.navigate(["/users"])
 	}
