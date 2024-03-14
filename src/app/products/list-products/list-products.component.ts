@@ -22,11 +22,11 @@ export class ListProductsComponent implements OnInit, OnDestroy {
 
 	filterProducts(f: number) {
 		if (f == 0)
-			this.productService.getProducts().subscribe(products => {
+			this.productService.getAllProducts().subscribe(products => {
 				this.products = products
 			})
 		else
-			this.productService.getProductsOfCategory(+f).subscribe(products => {
+			this.productService.getAllProductsOfCategory(+f).subscribe(products => {
 				this.products = products
 			})
 	}
@@ -42,7 +42,7 @@ export class ListProductsComponent implements OnInit, OnDestroy {
 
 		this.categoryService.getAllCategoriesWithProducts().pipe(
 			concatMap(() => {
-				return this.productService.getProducts()
+				return this.productService.getAllProducts()
 			})
 		).subscribe()
 	}

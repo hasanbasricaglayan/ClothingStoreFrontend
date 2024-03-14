@@ -1,44 +1,77 @@
-<div class="container mt-5" *ngIf="UserCurrent">
-	<div class="row">
-		<div class="col-md-8 offset-md-2">
-			<div class="card">
-				<div class="card-body">
-					<h2 class="card-title text-center mb-4">Edit Account</h2>
-					<form (ngSubmit)="submitForm(f)" #f="ngForm">
-						<div class="form-group">
-							<label for="email">Email:</label>
-							<input type="email" class="form-control" id="email" [(ngModel)]="UserCurrent!.email" name="email" required>
-						</div>
-						<div class="form-group">
-							<label for="firstName">First Name:</label>
-							<input type="text" class="form-control" id="firstName" [(ngModel)]="UserCurrent!.firstName" name="firstName" required>
-						</div>
-						<div class="form-group">
-							<label for="lastName">Last Name:</label>
-							<input type="text" class="form-control" id="lastName" [(ngModel)]="UserCurrent!.lastName" name="lastName" required>
-						</div>
-						<div class="form-group">
-							<label for="dateOfBirth">Date of Birth:</label>
-							<input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="UserCurrent!.dateOfBirth" name="dateOfBirth" required>
-						</div>
-						<div class="form-group">
-							<label for="phoneNumber">Phone Number:</label>
-							<input type="tel" class="form-control" id="phoneNumber" [(ngModel)]="UserCurrent!.phoneNumber" name="phoneNumber" required>
-						</div>
-						<div class="form-group">
-							<label for="billingAddress">Billing Address:</label>
-							<input class="form-control" id="billingAddress" [(ngModel)]="UserCurrent!.billingAddress" name="billingAddress" required>
-						</div>
-						<div class="form-group">
-							<label for="deliveryAddress">Delivery Address:</label>
-							<input class="form-control" id="deliveryAddress" [(ngModel)]="UserCurrent!.deliveryAddress" name="deliveryAddress" required>
-						</div>
-						<div class="text-center">
-							<button type="submit" class="btn btn-primary">Save Changes</button>
-						</div>
-					</form>
+<div class="row m-3">
+	<h2>Modifier mes informations</h2>
+</div>
+<section class="bg-body-tertiary">
+	<div class="container pt-4">
+		<div class="row justify-content-center">
+			<form *ngIf="currentUser" class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-4 mb-3" #form="ngForm" (ngSubmit)="editUser()">
+				<div class="mb-3">
+					<label for="firstName" class="form-label"><strong>Prénom</strong></label>
+					<input type="text" class="form-control" id="firstName" required
+						   [(ngModel)]="currentUser.firstName"
+						   name="firstName"
+						   #firstName="ngModel">
+					<span class="error" *ngIf="firstName.invalid && firstName.touched">Le champ est obligatoire.</span>
 				</div>
-			</div>
+				<div class="mb-3">
+					<label for="lastName" class="form-label"><strong>Nom</strong></label>
+					<input type="text" class="form-control" id="lastName" required
+						   [(ngModel)]="currentUser.lastName"
+						   name="lastName"
+						   #lastName="ngModel">
+					<span class="error" *ngIf="lastName.invalid && lastName.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="phoneNumber" class="form-label"><strong>Téléphone</strong></label>
+					<input type="text" class="form-control" id="phoneNumber" required
+						   [(ngModel)]="currentUser.phoneNumber"
+						   name="phoneNumber"
+						   #phoneNumber="ngModel">
+					<span class="error" *ngIf="phoneNumber.invalid && phoneNumber.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="emailAddress" class="form-label"><strong>Email</strong></label>
+					<input type="email" class="form-control" id="emailAddress" required
+						   [(ngModel)]="currentUser.email"
+						   name="emailAddress"
+						   #emailAddress="ngModel">
+					<span class="error" *ngIf="emailAddress.invalid && emailAddress.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="password" class="form-label"><strong>Mot de passe</strong></label>
+					<input type="password" class="form-control" id="password" required
+						   [(ngModel)]="currentUser.password"
+						   name="password"
+						   #password="ngModel">
+					<span class="error" *ngIf="password.invalid && password.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="dateOfBirth" class="form-label"><strong>Date de naissance</strong></label>
+					<input type="date" class="form-control" id="dateOfBirth" required
+						   [(ngModel)]="currentUser.dateOfBirth"
+						   [ngModel]="currentUser.dateOfBirth | date:'yyyy-MM-dd'"
+						   name="dateOfBirth"
+						   #dateOfBirth="ngModel">
+					<span class="error" *ngIf="dateOfBirth.invalid && dateOfBirth.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="billingAddress" class="form-label"><strong>Adresse de facturation</strong></label>
+					<input type="text" class="form-control" id="billingAddress" required
+						   [(ngModel)]="currentUser.billingAddress"
+						   name="billingAddress"
+						   #billingAddress="ngModel">
+					<span class="error" *ngIf="billingAddress.invalid && billingAddress.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="deliveryAddress" class="form-label"><strong>Adresse de livraison</strong></label>
+					<input type="text" class="form-control" id="deliveryAddress" required
+						   [(ngModel)]="currentUser.deliveryAddress"
+						   name="deliveryAddress"
+						   #deliveryAddress="ngModel">
+					<span class="error" *ngIf="deliveryAddress.invalid && deliveryAddress.touched">Le champ est obligatoire.</span>
+				</div>
+				<button type="submit" class="btn btn-primary w-100" [disabled]="form.invalid">Valider</button>
+			</form>
 		</div>
 	</div>
-</div>
+</section>

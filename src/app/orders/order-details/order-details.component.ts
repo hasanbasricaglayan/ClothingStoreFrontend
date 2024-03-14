@@ -17,10 +17,9 @@ export class OrderDetailsComponent implements OnInit {
 	user?: UserDTO
 
 	orderProducts?: OrderProductDTO[]
-	orderStatus: string[] = ["En attente", "Validée", "Expédiée", "Livrée"]
-
 	order?: OrderDTO
 	selectedOrder?: OrderDTO
+	orderStatus: string[] = ["En attente", "Validée", "Expédiée", "Livrée"]
 	orderTotalPrice = 0
 
 	constructor(
@@ -46,10 +45,12 @@ export class OrderDetailsComponent implements OnInit {
 		if (orderProducts == undefined) {
 			return 0
 		}
+
 		let totalPriceOfOrder = 0
 		for (let i = 0; i < orderProducts.length; i++) {
 			totalPriceOfOrder = totalPriceOfOrder + this.getTotalPriceOfProduct(orderProducts[i])
 		}
+
 		return totalPriceOfOrder
 	}
 
@@ -68,7 +69,6 @@ export class OrderDetailsComponent implements OnInit {
 			.subscribe({
 				next: user => {
 					this.user = user
-					console.log(this.order)
 				},
 				error: () => {
 					this.router.navigate(['/orders'])
@@ -84,8 +84,9 @@ export class OrderDetailsComponent implements OnInit {
 			status: form.value.status,
 			products: this.order!.products
 		}
-		this.orderService.editOrder(order.orderId!, order)
-			.subscribe(() => this.router.navigate(['/orders']))
+		this.orderService.editOrder(order.orderId!, order).subscribe(() => {
+			this.router.navigate(['/orders'])
+		})
 	}
 
 	ngOnInit(): void {

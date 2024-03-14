@@ -6,7 +6,7 @@
 		<div class="row justify-content-center">
 			<form *ngIf="user" class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-4 mb-3" #form="ngForm" (ngSubmit)="editUser()">
 				<div class="mb-3">
-					<label for="firstName" class="form-label">Prénom</label>
+					<label for="firstName" class="form-label"><strong>Prénom</strong></label>
 					<input type="text" class="form-control" id="firstName" required
 						   [(ngModel)]="user.firstName"
 						   name="firstName"
@@ -14,7 +14,7 @@
 					<span class="error" *ngIf="firstName.invalid && firstName.touched">Le champ est obligatoire.</span>
 				</div>
 				<div class="mb-3">
-					<label for="lastName" class="form-label">Nom</label>
+					<label for="lastName" class="form-label"><strong>Nom</strong></label>
 					<input type="text" class="form-control" id="lastName" required
 						   [(ngModel)]="user.lastName"
 						   name="lastName"
@@ -22,7 +22,7 @@
 					<span class="error" *ngIf="lastName.invalid && lastName.touched">Le champ est obligatoire.</span>
 				</div>
 				<div class="mb-3">
-					<label for="phoneNumber" class="form-label">Téléphone</label>
+					<label for="phoneNumber" class="form-label"><strong>Téléphone</strong></label>
 					<input type="text" class="form-control" id="phoneNumber" required
 						   [(ngModel)]="user.phoneNumber"
 						   name="phoneNumber"
@@ -30,7 +30,7 @@
 					<span class="error" *ngIf="phoneNumber.invalid && phoneNumber.touched">Le champ est obligatoire.</span>
 				</div>
 				<div class="mb-3">
-					<label for="emailAddress" class="form-label">Email</label>
+					<label for="emailAddress" class="form-label"><strong>Email</strong></label>
 					<input type="email" class="form-control" id="emailAddress" required
 						   [(ngModel)]="user.email"
 						   name="emailAddress"
@@ -38,7 +38,7 @@
 					<span class="error" *ngIf="emailAddress.invalid && emailAddress.touched">Le champ est obligatoire.</span>
 				</div>
 				<div class="mb-3">
-					<label for="password" class="form-label">Mot de passe</label>
+					<label for="password" class="form-label"><strong>Mot de passe</strong></label>
 					<input type="password" class="form-control" id="password" required
 						   [(ngModel)]="user.password"
 						   name="password"
@@ -46,7 +46,7 @@
 					<span class="error" *ngIf="password.invalid && password.touched">Le champ est obligatoire.</span>
 				</div>
 				<div class="mb-3">
-					<label for="dateOfBirth" class="form-label">Date de naissance</label>
+					<label for="dateOfBirth" class="form-label"><strong>Date de naissance</strong></label>
 					<input type="date" class="form-control" id="dateOfBirth" required
 						   [(ngModel)]="user.dateOfBirth"
 						   name="dateOfBirth"
@@ -54,7 +54,7 @@
 					<span class="error" *ngIf="dateOfBirth.invalid && dateOfBirth.touched">Le champ est obligatoire.</span>
 				</div>
 				<div class="mb-3">
-					<label for="billingAddress" class="form-label">Adresse de facturation</label>
+					<label for="billingAddress" class="form-label"><strong>Adresse de facturation</strong></label>
 					<input type="text" class="form-control" id="billingAddress" required
 						   [(ngModel)]="user.billingAddress"
 						   name="billingAddress"
@@ -62,7 +62,7 @@
 					<span class="error" *ngIf="billingAddress.invalid && billingAddress.touched">Le champ est obligatoire.</span>
 				</div>
 				<div class="mb-3">
-					<label for="deliveryAddress" class="form-label">Adresse de livraison</label>
+					<label for="deliveryAddress" class="form-label"><strong>Adresse de livraison</strong></label>
 					<input type="text" class="form-control" id="deliveryAddress" required
 						   [(ngModel)]="user.deliveryAddress"
 						   name="deliveryAddress"
@@ -73,9 +73,9 @@
 					<input type="checkbox" class="form-check-input" id="isAdmin"
 						   [(ngModel)]="user.isAdmin"
 						   name="isAdmin">
-					<label for="isAdmin" class="form-check-label">Admin ?</label>
+					<label for="isAdmin" class="form-check-label"><strong class="text-danger">Admin ?</strong></label>
 				</div>
-				<button type="submit" class="btn btn-primary" [disabled]="form.invalid">Valider</button>
+				<button type="submit" class="btn btn-primary w-100" [disabled]="form.invalid">Valider</button>
 			</form>
 		</div>
 	</div>

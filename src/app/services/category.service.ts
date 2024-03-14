@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { CategoryDTO } from '../models/category/category-dto';
-import { ProductDTO } from '../models/product/product-dto';
 
 @Injectable({
 	providedIn: 'root'
@@ -11,10 +10,6 @@ export class CategoryService {
 	private categories: CategoryDTO[] = []
 	private updatedCategories$$ = new Subject<CategoryDTO[]>()
 	readonly updatedCategories$ = this.updatedCategories$$.asObservable()
-
-	private products: ProductDTO[] = []
-	private updatedProducts$$ = new Subject<ProductDTO[]>()
-	readonly updatedProducts$ = this.updatedProducts$$.asObservable()
 
 	baseURL = "https://localhost:7108/api/Categories"
 
@@ -90,10 +85,9 @@ export class CategoryService {
 			})
 		}
 
-		this.http.delete(URL, options)
-			.subscribe(() => {
-				this.categories = this.categories.filter(category => category.categoryId !== categoryId)
-				this.updatedCategories$$.next([...this.categories])
-			})
+		this.http.delete(URL, options).subscribe(() => {
+			this.categories = this.categories.filter(category => category.categoryId !== categoryId)
+			this.updatedCategories$$.next([...this.categories])
+		})
 	}
 }

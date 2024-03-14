@@ -35,8 +35,9 @@ export class EditUserComponent implements OnInit {
 	}
 
 	editUser() {
-		this.userService.editUser(this.user!.userId!, this.user!)
-			.subscribe(() => this.router.navigate(['/users']))
+		this.userService.editUser(this.user!.userId!, this.user!).subscribe(() => {
+			this.router.navigate(['/users'])
+		})
 	}
 
 	ngOnInit(): void {

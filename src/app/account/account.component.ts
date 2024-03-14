@@ -9,16 +9,15 @@ import { UserService } from '../services/user.service';
 	styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
+	user?: UserDTO
 
 	constructor(private router: Router, private userService: UserService) { }
-
-	user?: UserDTO
 
 	goToEditPage() {
 		this.router.navigate(["/edit-user"]);
 	}
 
-	goToOrderPage() {
+	goToOrdersPage() {
 		this.router.navigate(["/orders"]);
 	}
 
@@ -28,12 +27,8 @@ export class AccountComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-
-		console.log("Account")
 		this.userService.getUserByToken().subscribe(user => {
-			this.user = user;
-			console.log(this.user?.firstName)
-
+			this.user = user
 		})
 	}
 }
