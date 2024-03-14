@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserDTO } from '../models/user/user-dto';
-import { UserService } from '../services/user.service';
 import { LoginService } from '../services/login.service';
+import { UserService } from '../services/user.service';
 
 @Component({
 	selector: 'app-account',
@@ -10,36 +10,37 @@ import { LoginService } from '../services/login.service';
 	styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
+	constructor(private router: Router, private userService: UserService, private loginService: LoginService) { }
+	role?: boolean
 	user?: UserDTO
 
-
-	constructor(private router: Router, private userService: UserService , private loginService : LoginService) { }
-	role? : boolean
-	user?: UserDTO
-
-	isAdmin(){
-		if(localStorage.getItem("role") == "client"){
+	isAdmin() {
+		if (localStorage.getItem("role") == "client") {
 			this.role = false;
 		}
-		else{
-			this.role=true;
+		else {
+			this.role = true;
 		}
 
 	}
 
 	goToAdminUsersListPage() {
-		this.router.navigate(["/users"]);
+		this.router.navigate(["/users"])
 	}
 	goToAdminOrderListPage() {
-		this.router.navigate(["/orders"]);
+		this.router.navigate(["/orders"])
 	}
 
 	goToEditPage() {
-		this.router.navigate(["/edit-user"]);
+		this.router.navigate(["/edit-user"])
 	}
 
 	goToOrdersPage() {
-		this.router.navigate(["/orders"]);
+		this.router.navigate(["/orders"])
+	}
+
+	goToCategoriesListPage() {
+		this.router.navigate(["/categories"])
 	}
 
 	deconnect() {

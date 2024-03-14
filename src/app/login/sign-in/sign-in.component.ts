@@ -20,8 +20,8 @@ export class SignInComponent {
 			email: form.value.emailAddress,
 			password: form.value.password,
 			dateOfBirth: form.value.dateOfBirth,
-			billingAdress: form.value.billingAddress,
-			deliveryAdress: form.value.deliveryAddress,
+			billingAddress: form.value.billingAddress,
+			deliveryAddress: form.value.deliveryAddress,
 			isAdmin: false
 		}
     console.log(newUser)
@@ -29,4 +29,3 @@ export class SignInComponent {
 		this.router.navigate(['/login'])
 	}
 }
-

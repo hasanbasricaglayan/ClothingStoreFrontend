@@ -6,6 +6,6 @@ export interface UserToDisplay {
 	phoneNumber: string
 	email: string
 	dateOfBirth: Date
-	billingAdress: string
-	deliveryAdress: string
+	billingAddress: string
+	deliveryAddress: string
 }

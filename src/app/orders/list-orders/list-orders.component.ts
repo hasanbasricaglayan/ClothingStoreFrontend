@@ -35,8 +35,8 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 					fullName: this.userService.getUserFullname(user!),
 					phoneNumber: user!.phoneNumber,
 					email: user!.email,
-					billingAdress: user!.billingAdress,
-					deliveryAdress: user!.deliveryAdress
+					billingAddress: user!.billingAddress,
+					deliveryAddress: user!.deliveryAddress
 				} as UserToDisplay
 			} as OrderToDisplay
 		})
@@ -54,8 +54,8 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 					fullName: this.userService.getUserFullname(this.currentUser!),
 					phoneNumber: this.currentUser!.phoneNumber,
 					email: this.currentUser!.email,
-					billingAdress: this.currentUser!.billingAdress,
-					deliveryAdress: this.currentUser!.deliveryAdress
+					billingAddress: this.currentUser!.billingAddress,
+					deliveryAddress: this.currentUser!.deliveryAddress
 				} as UserToDisplay
 			} as OrderToDisplay
 		})
@@ -114,7 +114,7 @@ export class ListOrdersComponent implements OnInit, OnDestroy {
 			})
 
 		}
-		
+
 	}
 
 	ngOnDestroy(): void {

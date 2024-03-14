@@ -8,8 +8,8 @@ export interface UserDTO {
 	email: string
 	password: string
 	dateOfBirth: Date
-	billingAdress: string
-	deliveryAdress: string
+	billingAddress: string
+	deliveryAddress: string
 	isAdmin: boolean
 	orders?: OrderDTO[]
 }

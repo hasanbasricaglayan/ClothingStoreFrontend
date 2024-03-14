@@ -11,7 +11,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 	declarations: [
 		ListProductsComponent,
 		ListProductsAdminComponent,
-		AddProductComponent
+		AddProductComponent,
 		ProductDetailsComponent
 	],
 	imports: [

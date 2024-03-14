@@ -19,7 +19,7 @@ export class ListProductsComponent implements OnInit, OnDestroy {
 	products: ProductDTO[] = []
 	filteredProducts?: ProductDTO[]
 
-	constructor(private productService: ProductService, private categoryService: CategoryService) { }
+	constructor(private productService: ProductService, private categoryService: CategoryService, private researchService: ResearchService) { }
 
 	filterProducts(categoryFilter: number) {
 		if (categoryFilter == 0)
