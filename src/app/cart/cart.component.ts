@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class CartComponent implements OnInit{
 
-  
+  token? : boolean
   user? : UserDTO
   orders? : Order
   orderProducts? : OrderProduct[] = []
@@ -26,14 +26,14 @@ export class CartComponent implements OnInit{
   ListProductToOrder(){
 
     const deSerializedOrder = localStorage.getItem('orders');
-	
+    
 		// Désérialisation de l'objet JSON récupéré
 		const OrderD = JSON.parse(deSerializedOrder!);
 
     this.orders = new Order(
        0,
       this.user!.userId!,
-      new Date(2000,1,1),
+      new Date(),
       "En attente",
       this.orderProducts!
       );
@@ -68,6 +68,8 @@ export class CartComponent implements OnInit{
     )
     console.log(newOrders)
     this.orders!.products = newOrders
+    this.orderProducts = newOrders
+    this.refreshLocalStorage()
     console.log(this.orders)
     this.orderTotalPrice = this.getTotalPriceOfOrder(this.orders!.products)
 
@@ -84,11 +86,16 @@ export class CartComponent implements OnInit{
   
   ngOnInit(): void {
     console.log("Account")
+    if (localStorage.getItem("token") != undefined) {
+      this.token! = true
+    }else{this.token = false}
+    
 		this.userService.getUserByToken().subscribe(user => {
 			this.user = user;
-      this.ListProductToOrder()
-    this.orderTotalPrice = this.getTotalPriceOfOrder(this.orders!.products)
 					})
+
+    this.ListProductToOrder()
+    this.orderTotalPrice = this.getTotalPriceOfOrder(this.orders!.products)
     
     
   }
