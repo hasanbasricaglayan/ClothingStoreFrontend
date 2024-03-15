@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, concatMap } from 'rxjs';
 import { CategoryDTO } from 'src/app/models/category/category-dto';
-import { OrderDTO } from 'src/app/models/order/order-dto';
-import { OrderToDisplay } from 'src/app/models/order/order-to-display';
 import { ProductDTO } from 'src/app/models/product/product-dto';
 import { ProductToDisplay } from 'src/app/models/product/product-to-display';
 import { CategoryService } from 'src/app/services/category.service';

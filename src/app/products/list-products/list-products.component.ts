@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, concatMap } from 'rxjs';
 import { CategoryDTO } from 'src/app/models/category/category-dto';
 import { ProductDTO } from 'src/app/models/product/product-dto';
+import { ResearchService } from 'src/app/services/research.service';
 import { CategoryService } from '../../services/category.service';
 import { ProductService } from '../../services/product.service';
-import { ResearchService } from 'src/app/services/research.service';
 
 @Component({
 	selector: 'app-list-products',
@@ -34,10 +34,10 @@ export class ListProductsComponent implements OnInit, OnDestroy {
 
 	reset() {
 		this.ngOnInit()
-		}
+	}
 
 	receivedMessage?: string;
-	searchProduct(r : string){
+	searchProduct(r: string) {
 
 		this.products = this.products.filter(p => p.name.toLowerCase().includes(r.toLowerCase()))
 	}
@@ -60,7 +60,7 @@ export class ListProductsComponent implements OnInit, OnDestroy {
 			this.receivedMessage = data ? data.message : '';
 			console.log(this.receivedMessage)
 			this.searchProduct(this.receivedMessage!)
-		  });
+		});
 	}
 
 	ngOnDestroy(): void {

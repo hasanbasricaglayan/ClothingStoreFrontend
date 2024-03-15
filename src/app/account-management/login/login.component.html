@@ -3,21 +3,21 @@
 </div>
 <section class="bg-body-tertiary">
 	<div class="container pt-3">
-		<div class="row align-items-center justify-content-center">
+		<div class="row justify-content-center align-items-center">
 			<form class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-4 mb-3" #form="ngForm" (ngSubmit)="logintoAPI(emailAddress.value, password.value)">
 				<div class="mb-3">
-					<label for="emailAddress" class="form-label"><strong>Email</strong></label>
-					<input type="email" class="form-control" id="emailAddress" required #emailAddress>
+					<label for="userEmail" class="form-label"><strong>Email</strong></label>
+					<input type="email" class="form-control" id="userEmail" required #emailAddress>
 				</div>
 				<div class="mb-3">
-					<label for="password" class="form-label"><strong>Mot de passe</strong></label>
-					<input type="password" class="form-control" id="password" required #password>
+					<label for="userPassword" class="form-label"><strong>Mot de passe</strong></label>
+					<input type="password" class="form-control" id="userPassword" required #password>
 				</div>
 				<div class="text-center mb-3">
 					<button type="submit" class="btn btn-info w-100">Se connecter</button>
 				</div>
 				<div class="text-center">
-					<a href="sign-in">Pas encore inscrit ? Cliquez ici pour créer un compte !</a>
+					<a href="account/sign-up">Pas encore inscrit ? Cliquez ici pour créer un compte !</a>
 				</div>
 			</form>
 		</div>

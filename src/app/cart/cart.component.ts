@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDTO } from '../models/user/user-dto';
-import { UserService } from '../services/user.service';
-import { OrderService } from '../services/order.service';
-import { OrderDTO } from '../models/order/order-dto';
-import { Order } from '../models/order/order';
-import { OrderProduct } from '../models/order-product/order-product';
-import { Product } from '../models/product/product';
 import { Router } from '@angular/router';
+import { OrderProduct } from '../models/order-product/order-product';
+import { Order } from '../models/order/order';
+import { Product } from '../models/product/product';
+import { UserDTO } from '../models/user/user-dto';
+import { OrderService } from '../services/order.service';
+import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+	selector: 'app-cart',
+	templateUrl: './cart.component.html',
+	styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit{
+export class CartComponent implements OnInit {
 
   token? : boolean
   user? : UserDTO
@@ -23,10 +22,10 @@ export class CartComponent implements OnInit{
   constructor(private userService : UserService, private orderService : OrderService, private router:Router){}
   
 
-  ListProductToOrder(){
+	ListProductToOrder() {
 
-    const deSerializedOrder = localStorage.getItem('orders');
-    
+		const deSerializedOrder = localStorage.getItem('orders');
+
 		// Désérialisation de l'objet JSON récupéré
 		const OrderD = JSON.parse(deSerializedOrder!);
 
@@ -43,11 +42,11 @@ export class CartComponent implements OnInit{
         this.orderProducts?.push(orderList)
     });
 
-    console.log(this.orders)
+		console.log(this.orders)
 
-  }
+	}
 
-  getTotalPriceOfOrder(orderProducts: OrderProduct[]) {
+	getTotalPriceOfOrder(orderProducts: OrderProduct[]) {
 		if (orderProducts == undefined) {
 			return 0
 		}
@@ -58,23 +57,24 @@ export class CartComponent implements OnInit{
 		return totalPriceOfOrder
 	}
 
-  getTotalPriceOfProduct(product: OrderProduct) {
+	getTotalPriceOfProduct(product: OrderProduct) {
 		return product.quantity * product.price
 	}
 
-  deleteOrderProduct(name: string) {
-   var newOrders = this.orders!.products.filter(p => 
-    p.product?.name != name
-    )
-    console.log(newOrders)
-    this.orders!.products = newOrders
-    this.orderProducts = newOrders
-    this.refreshLocalStorage()
-    console.log(this.orders)
-    this.orderTotalPrice = this.getTotalPriceOfOrder(this.orders!.products)
+	deleteOrderProduct(name: string) {
+		var newOrders = this.orders!.products.filter(p =>
+			p.product?.name != name
+		)
+		console.log(newOrders)
+		this.orders!.products = newOrders
+		this.orderProducts = newOrders
 
-    this.router.navigate(["/cart"])
-  }
+		console.log(this.orders)
+		this.orderTotalPrice = this.getTotalPriceOfOrder(this.orders!.products)
+
+		this.refreshLocalStorage()
+		this.router.navigate(["/cart"])
+	}
 
   refreshLocalStorage(){
     localStorage.removeItem('orders');
@@ -92,12 +92,11 @@ export class CartComponent implements OnInit{
     
 		this.userService.getUserByToken().subscribe(user => {
 			this.user = user;
-					})
+			this.ListProductToOrder()
+			this.orderTotalPrice = this.getTotalPriceOfOrder(this.orders!.products)
+		})
 
-    this.ListProductToOrder()
-    this.orderTotalPrice = this.getTotalPriceOfOrder(this.orders!.products)
-    
-    
-  }
+
+	}
 
 }

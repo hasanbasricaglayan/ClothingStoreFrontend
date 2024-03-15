@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { CategoryDTO } from 'src/app/models/category/category-dto';
 import { ProductDTO } from 'src/app/models/product/product-dto';
+import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -9,9 +12,11 @@ import { ProductService } from 'src/app/services/product.service';
 	templateUrl: './add-product.component.html',
 	styleUrls: ['./add-product.component.css']
 })
-export class AddProductComponent {
+export class AddProductComponent implements OnInit {
+	categoriesSubscription?: Subscription
+	categories: CategoryDTO[] = []
 
-	constructor(private router: Router, private productService: ProductService) { }
+	constructor(private router: Router, private categoryService: CategoryService, private productService: ProductService) { }
 
 	addProduct(form: NgForm) {
 		let product: ProductDTO = {
@@ -28,4 +33,16 @@ export class AddProductComponent {
 		this.productService.addProduct(product)
 		this.router.navigate(['/products/admin'])
 	}
+
+	ngOnInit(): void {
+		this.categoriesSubscription = this.categoryService.updatedCategories$.subscribe(categories => {
+			this.categories = categories
+		})
+		this.categoryService.getAllCategoriesWithProducts().subscribe()
+	}
+
+	ngOnDestroy(): void {
+		this.categoriesSubscription?.unsubscribe()
+	}
+
 }

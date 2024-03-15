@@ -5,15 +5,16 @@ import { UserDTO } from 'src/app/models/user/user-dto';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+	selector: 'app-sign-up',
+	templateUrl: './sign-up.component.html',
+	styleUrls: ['./sign-up.component.css']
 })
-export class SignInComponent {
-	constructor(private userService: UserService, private router: Router) { }
+export class SignUpComponent {
 
-	addUser(form: NgForm) {
-		let newUser: UserDTO = {
+	constructor(private router: Router, private userService: UserService) { }
+
+	signUpUser(form: NgForm) {
+		let user: UserDTO = {
 			firstName: form.value.firstName,
 			lastName: form.value.lastName,
 			phoneNumber: form.value.phoneNumber,
@@ -24,8 +25,7 @@ export class SignInComponent {
 			deliveryAddress: form.value.deliveryAddress,
 			isAdmin: false
 		}
-    console.log(newUser)
-		this.userService.addUser(newUser)
-		this.router.navigate(['/login'])
+		this.userService.addUser(user)
+		this.router.navigate(['/account/login'])
 	}
 }

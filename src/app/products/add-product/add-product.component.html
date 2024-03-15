@@ -1,1 +1,77 @@
-<p>add-product works!</p>
+<div class="row text-center m-3">
+	<h2>Ajout d'un nouveau produit</h2>
+</div>
+<section class="bg-body-tertiary">
+	<div class="container pt-3">
+		<div class="row align-items-center justify-content-center">
+			<form class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-4 mb-3" #form="ngForm" (ngSubmit)="addProduct(form)">
+				<div class="d-flex justify-content-start align-items-center gap-3 mb-3">
+					<label for="category" class="form-label"><strong>Catégorie</strong></label>
+					<select class="form-control" id="category"
+							ngModel
+							name="category"
+							#category="ngModel">
+						<option *ngFor="let category of categories">{{category.name}}</option>
+					</select>
+				</div>
+				<div class="mb-3">
+					<label for="brand" class="form-label"><strong>Marque</strong></label>
+					<input type="text" class="form-control" id="brand" required
+						   ngModel
+						   name="brand"
+						   #brand="ngModel">
+					<span class="error" *ngIf="brand.invalid && brand.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="productName" class="form-label"><strong>Nom</strong></label>
+					<input type="text" class="form-control" id="productName" required
+						   ngModel
+						   name="productName"
+						   #productName="ngModel">
+					<span class="error" *ngIf="productName.invalid && productName.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="color" class="form-label"><strong>Couleur</strong></label>
+					<input type="text" class="form-control" id="color" required
+						   ngModel
+						   name="color"
+						   #color="ngModel">
+					<span class="error" *ngIf="color.invalid && color.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="size" class="form-label"><strong>Taille</strong></label>
+					<input type="text" class="form-control" id="size" required
+						   ngModel
+						   name="size"
+						   #size="ngModel">
+					<span class="error" *ngIf="size.invalid && size.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="price" class="form-label"><strong>Prix</strong></label>
+					<input type="number" class="form-control" id="price" required
+						   ngModel
+						   name="price"
+						   #price="ngModel">
+					<span class="error" *ngIf="price.invalid && price.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="quantityInStock" class="form-label"><strong>Quantité en stock</strong></label>
+					<input type="number" class="form-control" id="quantityInStock" required
+						   ngModel
+						   name="quantityInStock"
+						   #quantityInStock="ngModel">
+					<span class="error" *ngIf="quantityInStock.invalid && quantityInStock.touched">Le champ est obligatoire.</span>
+				</div>
+				<div class="mb-3">
+					<label for="ImageURL" class="form-label"><strong>Image</strong></label>
+					<input type="text" class="form-control" id="ImageURL" required
+						   ngModel
+						   name="ImageURL"
+						   #ImageURL="ngModel">
+					<span class="error" *ngIf="ImageURL.invalid && ImageURL.touched">Le champ est obligatoire.</span>
+				</div>
+				<button type="submit" class="btn btn-primary w-100" [disabled]="form.invalid">Valider</button>
+			</form>
+		</div>
+	</div>
+</section>
