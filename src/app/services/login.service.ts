@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartService } from './cart.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -18,7 +19,7 @@ export class LoginService {
 	}
 
 
-	constructor(private http: HttpClient, private router: Router) { }
+	constructor(private http: HttpClient, private router: Router , private cartService :CartService) { }
 
 	isAuthenticated(): boolean {
 		if (localStorage.getItem("token") == undefined)
@@ -97,6 +98,7 @@ export class LoginService {
 		}
 		if (localStorage.getItem("orders")) {
 			localStorage.removeItem("orders")
+			this.cartService.resetData()
 		}
 	}
 }

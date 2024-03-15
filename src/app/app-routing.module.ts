@@ -6,7 +6,7 @@ import { authGuard, authGuardAdmin } from './shared/auth.guard';
 
 const routes: Routes = [
 	{ path: "", component: ListProductsComponent },
-	{ path: "cart", component: CartComponent },
+	{ path: "cart", component: CartComponent, canActivate: [authGuard]  },
 	{
 		path: "users",
 		loadChildren: () => import('./users/users.module').then(m => m.UsersModule),

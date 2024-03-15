@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { Order } from '../models/order/order';
 import { OrderDTO } from '../models/order/order-dto';
 import { ProductDTO } from '../models/product/product-dto';
+import { CartService } from './cart.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -22,7 +23,7 @@ export class OrderService {
 		})
 	}
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient , private cartService : CartService) { }
 
 	getAllOrdersWithProducts(): Observable<OrderDTO[]> {
 		const URL = `${this.baseURL}/`
@@ -60,6 +61,32 @@ export class OrderService {
 			this.options)
 	}
 
+	addOrder(order: OrderDTO) {
+        const URL = this.baseURL
+
+        const options = {
+            headers: new HttpHeaders({
+                'content-type': 'application/json',
+                'authorization': 'Bearer ' + localStorage.getItem('token') || ''
+            })
+        }
+		var body = JSON.stringify({
+			UserId: order.userId,
+			OrderDate: new Date().toISOString().split('T')[0],
+			Status: order.status,
+			Products: order.products
+		})
+		console.log(body)
+        this.http.post<OrderDTO>(
+            URL,
+            body,
+            options)
+            .subscribe(order => {
+                this.orders = [...this.orders, order]
+                this.updatedOrders$$.next([...this.orders])
+            })
+    }
+
 	CartOrder(product: ProductDTO, quantity: number) {
 
 		const orderList = [{ product: product, quantity: quantity }]
@@ -71,9 +98,21 @@ export class OrderService {
 			this.addToCart(order)
 		}
 
+		const deSerializedOrder = localStorage.getItem('orders');
+
+		// Désérialisation de l'objet JSON récupéré
+		const OrderD = JSON.parse(deSerializedOrder!);
+			var message : number = 0	
+			OrderD.forEach((element: { product: ProductDTO, quantity: number }) => {
+				message += element.quantity
+			});
+			
+			this.cartService.sendData({ message })
+		}
 
 
-	}
+
+	
 
 
 	initCart(orderList: { product: ProductDTO; quantity: number; }[]) {
