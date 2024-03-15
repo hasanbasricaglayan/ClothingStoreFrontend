@@ -1,0 +1,141 @@
+<section class="bg-body-tertiary" *ngIf="role==false">
+	<div class="container pt-3">
+		<div class="row justify-content-center align-items-center">
+			<div class="col-lg-8">
+				<div class="row text-center mb-3">
+					<h1>Mon compte</h1>
+				</div>
+				<div class="card mb-4">
+					<div class="card-body px-5 py-0">
+						<div class="row justify-content-center align-items-center text-center my-3">
+							<h2>Informations personnelles</h2>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Prénom et Nom</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.firstName + ' ' + user?.lastName}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Email</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.email}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Téléphone</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.phoneNumber}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Date de naissance</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.dateOfBirth | date : 'dd/MM/yyyy'}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Addresse de facturation</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.billingAddress}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-sm-4">
+								<p class="mb-0"><strong>Addresse de livraison</strong></p>
+							</div>
+							<div class="col-sm-8">
+								<p class="mb-0">{{user?.deliveryAddress}}</p>
+							</div>
+						</div>
+						<hr>
+						<div class="d-flex justify-content-center align-items-center gap-3 my-3">
+							<button class="btn btn-primary" (click)="goToEditAccountPage()">Modifier</button>
+							<button class="btn btn-secondary" (click)="goToOrdersListPage()">Historique des commandes</button>
+							<button class="btn btn-danger" (click)="deconnect()">Se déconnecter</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="panel-admin" *ngIf="role==true">
+	<div class="container pt-3">
+		<div class="row text-center mb-3">
+			<h1>Panel Admin</h1>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="card h-100">
+					<div class="card-body d-flex flex-column justify-content-center align-items-center gap-1 text-center">
+						<h5 class="card-title">Gestion des utilisateurs <i class="bi bi-people"></i></h5>
+						<div class="mt-auto mb-3">
+							<p class="card-text">Gérer les utilisateurs inscrits sur le site.</p>
+						</div>
+						<div class=" mt-auto">
+							<button class="btn btn-info" (click)="goToAdminUsersListPage()">Accéder</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card h-100">
+					<div class="card-body d-flex flex-column justify-content-center align-items-center gap-1 text-center">
+						<h5 class="card-title">Gestion des commandes <i class="bi bi-box-seam"></i></h5>
+						<div class="mt-auto mb-3">
+							<p class="card-text">Gérer les commandes passées par les utilisateurs.</p>
+						</div>
+						<div class="mt-auto">
+							<button class="btn btn-info" (click)="goToAdminOrdersListPage()">Accéder</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card h-100">
+					<div class="card-body d-flex flex-column justify-content-center align-items-center gap-1 text-center">
+						<h5 class="card-title">Gestion des catégories <i class="bi bi-tags-fill"></i></h5>
+						<div class="mt-auto mb-3">
+							<p class="card-text">Gérer les catégories des produits.</p>
+						</div>
+						<div class="mt-auto">
+							<button class="btn btn-info" (click)="goToAdminCategoriesListPage()">Accéder</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card h-100">
+					<div class="card-body d-flex flex-column justify-content-center align-items-center gap-1 text-center">
+						<h5 class="card-title">Gestion des produits <i class="bi bi-pencil-square"></i></h5>
+						<div class="mt-auto mb-3">
+							<p class="card-text">Gérer les produits disponibles dans le catalogue.</p>
+						</div>
+						<div class="mt-auto">
+							<button class="btn btn-info" (click)="goToAdminProductsListPage()">Accéder</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row justify-content-center align-items-center mt-4">
+			<button class="btn btn-danger w-25" (click)="deconnect()">Se déconnecter</button>
+		</div>
+	</div>
+</section>

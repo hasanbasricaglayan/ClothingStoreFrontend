@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../services/login.service';
-import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
 	selector: 'app-login',
@@ -9,11 +8,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-	constructor(private loginService: LoginService , private router : Router) { }
-
-	goToSignIn() {
-		this.router.navigate(['/users'])
-		}
+	constructor(private loginService: LoginService) { }
 
 	logintoAPI(email: string, password: string) {
 		this.loginService.login(email, password)

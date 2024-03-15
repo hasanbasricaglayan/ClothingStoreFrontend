@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AccountComponent } from './account/account.component';
-import { EditUserComponent } from './account/edit-user/edit-user.component';
-import { LoginComponent } from './login/login.component';
-import { authGuardGuard, authGuardGuardAdmin } from './shared/auth.guard';
-import { SignInComponent } from './login/sign-in/sign-in.component';
-import { ListProductsComponent } from './products/list-products/list-products.component';
 import { CartComponent } from './cart/cart.component';
+import { ListProductsComponent } from './products/list-products/list-products.component';
+import { authGuard, authGuardAdmin } from './shared/auth.guard';
 
 const routes: Routes = [
+	{ path: "", component: ListProductsComponent },
+	{ path: "cart", component: CartComponent },
 	{
 		path: "users",
 		loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
-		canActivate: [authGuardGuard,authGuardGuardAdmin]
+		canActivate: [authGuard, authGuardAdmin]
 	},
 	{
 		path: "categories",
 		loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule),
+		canActivate: [authGuard, authGuardAdmin]
 	},
 	{
 		path: "products",
@@ -25,19 +24,12 @@ const routes: Routes = [
 	{
 		path: "orders",
 		loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule),
-		canActivate: [authGuardGuard]
+		canActivate: [authGuard]
 	},
 	{
-		path: "categories",
-		loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesModule),
-		canActivate: [authGuardGuard,authGuardGuardAdmin]
-	},
-	{ path: "login", component: LoginComponent },
-	{ path: "account", component: AccountComponent, canActivate: [authGuardGuard] },
-	{ path: "edit-user", component: EditUserComponent, canActivate: [authGuardGuard] },
-	{ path: "sign-in", component: SignInComponent },
-	{ path: "cart",component:CartComponent },
-	{path : '', component : ListProductsComponent}
+		path: "account",
+		loadChildren: () => import('./account-management/account-management.module').then(m => m.AccountManagementModule),
+	}
 ];
 
 @NgModule({

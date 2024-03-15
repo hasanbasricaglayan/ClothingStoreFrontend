@@ -1,11 +1,7 @@
 <div class="container text-center">
-	<button type="button" class="btn btn-secondary"
-
-				(click)="reset()">reset
-		</button>
-	<div class="btn-group mx-3 my-5">
-		<button type="button" class="btn btn-secondary" [value]=0 (click)="filterProducts(0)">Tout</button>
-		<button type="button" class="btn btn-secondary"
+	<div class="btn-group gap-2 m-3">
+		<button type="button" class="btn btn-dark rounded-pill" [value]=0 (click)="filterProducts(0)">Tout</button>
+		<button type="button" class="btn btn-secondary rounded-pill"
 				*ngFor="let category of categories" [value]="category.categoryId"
 				(click)="filterProducts(category.categoryId!)">{{category.name}}
 		</button>
@@ -14,14 +10,13 @@
 		<div class="col p-2" *ngFor="let product of filteredProducts ? filteredProducts : products">
 			<div class="card h-100">
 				<a [routerLink]="['/products', product.productId]"><img [src]="product.imageURL" class="card-img-top" alt="product-image"></a>
-				<div class="card-body d-flex flex-column justify-content-center align-items-center gap-1">
+				<div class="card-body d-flex flex-column justify-content-center align-items-center gap-1 text-center">
 					<h6 class="card-title">{{product.brand}}</h6>
 					<div class="mt-auto">
 						<p class="card-text"><strong>{{product.name}}</strong></p>
 					</div>
 					<div class="mt-auto">
 						<p class="card-text mt-3">{{product.price}} €</p>
-						<button class="btn btn-primary"><i class="bi bi-bag-fill"></i> Ajouter au panier</button>
 					</div>
 				</div>
 			</div>

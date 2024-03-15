@@ -86,7 +86,7 @@
 										<th>Prix actuel [€]</th>
 										<th>Prix unitaire [€]</th>
 										<th>Prix total [€]</th>
-                                        <th> </th>
+										<th> </th>
 									</tr>
 								</thead>
 								<tbody class="align-middle">
@@ -97,10 +97,10 @@
 										<td>{{orderP.product!.name}}</td>
 										<td>{{orderP.product!.color}}</td>
 										<td>{{orderP.product!.size}}</td>
-										<td>{{orderP.product!.price  }}</td>
+										<td>{{orderP.product!.price }}</td>
 										<td>{{orderP.price}}</td>
 										<td>{{getTotalPriceOfProduct(orderP)}}</td>
-                                        <button (click)="deleteOrderProduct(orderP.product!.name)" ></button>
+										<button (click)="deleteOrderProduct(orderP.product!.name)"></button>
 									</tr>
 									<tr>
 										<td colspan="8"></td>
